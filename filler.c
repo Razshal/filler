@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/24 17:14:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/24 18:25:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void	*set_grid_size(char *str, t_fill *infos)
+static void	set_grid_size(char *str, t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -31,11 +31,26 @@ static void	*set_grid_size(char *str, t_fill *infos)
 
 static char	**grid_parser(t_fill *infos)
 {
-	char **grid;
+	char	**grid;
+	int		line;
 
-	set_grid_size(infos->currentline, infos);
-
-	while ()
+	line = 0;
+	if (infos->sizex == -1)
+		set_grid_size(infos->currentline, infos);
+	if (!(grid = (char**)malloc(sizeof(char*) * infos->sizex)))
+		return (NULL);
+	while (line < infos->sizex)
+	{
+		if (!grid[line])
+			grid[line] = ft_strnew(infos->sizey);
+		if (ft_isdigit((infos->currentline)[0]))
+		{
+			ft_strcat(grid[line], &(infos->currentline)[4]);
+			line++;
+		}
+		else
+			get_next_line(0, &infos->currentline);
+	}
 
 	return (grid);
 }
