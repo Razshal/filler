@@ -6,15 +6,15 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/01/24 11:54:58 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/01/25 16:34:34 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = mfonteni.filler
 PRINTFUNC = printf_functions/
 LIBDIR = libft/
-SRC = filler.c
-
+SRC = filler.c \
+	  parsers.c
 
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror

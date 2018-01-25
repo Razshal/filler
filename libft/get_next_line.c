@@ -6,11 +6,12 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 16:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/24 12:22:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:56:05 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
+#include <unistd.h>
 
 static char	*ft_strjoin_custom(char *s1, char *s2)
 {
