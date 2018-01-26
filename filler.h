@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/26 14:59:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:01:00 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void			set_grid_size(t_fill *infos);
 void			set_piece_size(t_fill *infos);
 void			grid_parser(t_fill *infos);
 void			piece_parser(t_fill *infos);
-
-
+int				place_piece(t_fill *infos, t_coord place, int line, int row);
 
 #endif

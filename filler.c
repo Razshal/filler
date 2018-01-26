@@ -6,16 +6,17 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/26 15:50:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:13:06 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int place_piece(t_fill *infos, t_coord place, int line, int row)
+int place_piece(t_fill *infos, t_coord place, int line, int row)
 {
 	int res;
 
+	res = 0;
 	if (!infos->grid[line + place.x] ||
 			!infos->grid[line + place.x][row + place.y])
 		return (0);
@@ -37,7 +38,7 @@ static int place_piece(t_fill *infos, t_coord place, int line, int row)
 	else
 		return (0);
 }
-
+/*
 static void get_closest_coordinates_from_ennemy()
 {
 	t_coord lastpos = search_my_last_block();
@@ -71,3 +72,4 @@ int main(void)
 			get_and_print_coordinates(infos);
 	}
 }
+*/

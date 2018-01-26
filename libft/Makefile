@@ -6,13 +6,12 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/01/24 12:22:00 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/01/26 17:06:32 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 PRINTFUNC = printf_functions/
-
 SRC = ft_atoi.c \
 	  ft_bzero.c \
 	  ft_countdigit.c \
