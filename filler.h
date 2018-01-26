@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/25 17:00:55 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:59:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 #define FILLER_H
 #include "libft/includes/libft.h"
 
+typedef struct	s_coord
+{
+	int x;
+	int y;
+}				t_coord;
+
 typedef	struct	s_fill
 {
 	char	*currentline;
 	char	player;
 	int		playernum;
-	int		sizex;
-	int		sizey;
-	int		piecesizex;
-	int		piecesizey;
+	t_coord	gridsize;
+	t_coord	piecesize;
 	char	**currentpiece;
+	int		overflow;
 	char	**grid;
 }				t_fill;
 
