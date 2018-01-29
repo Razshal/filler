@@ -6,13 +6,26 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/26 17:01:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/29 13:08:37 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 #define FILLER_H
 #include "libft/includes/libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#define NAME(name) printf("=== %s ===\n", name);
+#define SUCCESSMSG "\e[32m[Success]\e[39m\n"
+#define PRINTFSUCCESS printf("%s", SUCCESSMSG)
+#define FAILUREMSG "\e[31m[Failure]\e[39m\n"
+#define PRINTFFAILURE printf("%s", FAILUREMSG)
+#define EASYTESTFAIL printf("Echec d'un test de fonctionnement basique\n");
+#define INTMIN "-2147483648"
+#define INTMAX "2147483647"
 
 typedef struct	s_coord
 {
