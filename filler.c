@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 18:24:02 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/29 19:18:57 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int main(void)
 {
 	t_fill	*infos;
 	char	*str;
+	t_coord	lastpos;
 
 	str = NULL;
+	lastpos.x = -9999;
 	while (!str || (!ft_strstr(str, "mfonteni")
 				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
 		get_next_line(0, &str);
