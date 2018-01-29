@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/26 17:13:06 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/29 12:17:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,24 @@ int place_piece(t_fill *infos, t_coord place, int line, int row)
 
 	res = 0;
 	if (!infos->grid[line + place.x] ||
-			!infos->grid[line + place.x][row + place.y])
+			!infos->grid[line + place.x][row + place.y] || infos->overflow > 1)
 		return (0);
 	if (!infos->currentpiece[line])
 		return (1);
 	if (row < infos->piecesize.y)
-		res = place_piece(infos, place, line, row++);
+		res = place_piece(infos, place, line, ++row);
 	else if (line < infos->piecesize.x)
-		res = place_piece(infos, place, line++, 0);
+		res = place_piece(infos, place, ++line, 0);
 	if (res == 1 && infos->grid[line + place.x][row + place.y] == '.')
 		return (1);
-	else if (res == 1 &&
+	else if (res == 1 && infos->currentpiece[line][row] == '*' &&
 			infos->grid[line + place.x][row + place.y] == infos->player)
 		infos->overflow++;
 	else
+	{
+		ft_printf("line:%d row:%d\n", line + place.x, row + place.y);
 		return (0);
+	}
 	if (infos->overflow == 1)
 		return (1);
 	else
