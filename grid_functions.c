@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.c                                          :+:      :+:    :+:   */
+/*   grid_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 13:20:07 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 11:23:28 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/01/30 10:56:25 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-t_fill *structnew(char player, int playernum)
+t_coord grid_search(t_fill *infos)
 {
-	t_fill *new;
+	char	**grid;
+	int		line;
+	int		row;
 
-	if (!(new = (t_fill*)malloc(sizeof(t_fill))))
-		return (NULL);
-	new->grid = NULL;
-	new->currentline = NULL;
-	new->player = player;
-	new->playernum = playernum;
-	new->gridsize.x = -1;
-	new->gridsize.y = -1;
-	new->piecesize.x = -1;
-	new->piecesize.y = -1;
-	new->place.y = -9999;
-	new->place.x = -9999;
-	new->currentpiece = NULL;
-	new->overflow = 0;
-	return (new);
+	line = 0;
+	row = 0;
+	grid = infos->grid;
+	
 }

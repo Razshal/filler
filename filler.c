@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 19:18:57 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:25:41 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,22 @@
 
 static void get_closest_coordinates_from_ennemy()
 {
-	t_coord lastpos = search_my_last_block();
-
-
+	
 }
 
-static void get_and_print_coordinates(t_fill *infos)
+static t_coord get_and_print_coordinates(t_fill *infos)
 {
+	t_coord place;
 	
+
 }
 
 int main(void)
 {
 	t_fill	*infos;
 	char	*str;
-	t_coord	lastpos;
 
 	str = NULL;
-	lastpos.x = -9999;
 	while (!str || (!ft_strstr(str, "mfonteni")
 				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
 		get_next_line(0, &str);
@@ -44,7 +42,7 @@ int main(void)
 		while (!ft_strstr(infos->currentline, "got"))
 			get_next_line(0, &infos->currentline);
 		if ((ft_strstr(infos->currentline, "<got ("))[0] == infos->player)
-			get_and_print_coordinates(infos);
+			infos->place = get_and_print_coordinates(infos);
 	}
 }
 

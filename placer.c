@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 18:18:30 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 10:52:39 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		place_piece(t_fill *infos, t_coord place, int line, int row)
 	int res;
 
 	res = 0;
-	printf("line: %d, row %d\n", line + place.y, row + place.x);
+//	printf("line: %d, row %d\n", line + place.y, row + place.x);
 	if (!infos->currentpiece[line] && infos->overflow == 1)
 		return (1);
 	else if ((!infos->currentpiece[line] && infos->overflow != 1) ||

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 18:18:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:18:43 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef	struct	s_fill
 	int		playernum;
 	t_coord	gridsize;
 	t_coord	piecesize;
+	t_coord	place;
 	char	**currentpiece;
 	int		overflow;
 	char	**grid;
