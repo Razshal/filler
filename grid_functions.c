@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 11:40:33 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 12:53:52 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_coord grid_search(t_fill *infos, char c)
 	int		row;
 
 	line = 0;
-	row = 0;
 	grid = infos->grid;
 	while (grid[line++])
 	{
+		row = 0;
 		while (grid[line][row++])
 		{
 			if (grid[line][row] == c)

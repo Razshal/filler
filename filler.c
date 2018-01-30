@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 12:35:05 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:36:37 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ static t_coord get_and_print_coordinates(t_fill *infos)
 
 static void default_player(t_fill *infos)
 {
-	t_coord place;
+	t_coord	place;
+	int		result;
 
-	place.y = 0;
-	place.x = 0;
-	while (!place_piece(infos, 
+	place.y = -5;
+	result = 0;
+	while (!result || place.y++ < infos->gridsize.y + 10)
+	{
+		place.x = -5;
+		while (!(result = place_piece(infos, place, 0, 0)) ||
+				place.x < infos->gridsize.x + 10)
+			place.x++;
+	}
+	ft_printf(" [%d, %d]\n", place.y, place.x);
 }
 
 int main(void)
@@ -44,19 +52,22 @@ int main(void)
 	char	*str;
 
 	str = NULL;
-	while (!str || (!ft_strstr(str, "mfonteni")
+	while (!str || (!ft_strstr(str, "mfonteni.filler")
 				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
 		get_next_line(0, &str);
-	infos = ft_strstr(str, "p1") ? structnew('O', 1) : structnew('X', 2);
+	infos = (ft_strstr(str, "p1") ? structnew('O', 1) : structnew('X', 2));
 	infos->currentline = str;
 	while (!ft_strstr(infos->currentline, "== O fin"))
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		while (!ft_strstr(infos->currentline, "got"))
+		while (!(ft_strstr(infos->currentline, "<got (")))
+		{
+			ft_putendl("ici");
 			get_next_line(0, &infos->currentline);
+		}
 		if ((ft_strstr(infos->currentline, "<got ("))[0] == infos->player)
-			get_and_print_coordinates(infos);
+			default_player(infos);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 17:02:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:21:06 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	piece_parser(t_fill *infos)
 	{
 		if (!infos->currentpiece[line])
 			infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
-		if (infos->currentpiece[line] && !ft_strstr(infos->currentline, "<got"))
+		if (infos->currentpiece[line])
 			ft_strcat(infos->currentpiece[line++], infos->currentline);
 		else
 			break;
