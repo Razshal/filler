@@ -6,13 +6,23 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 13:42:10 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:21:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	set_grid_size(t_fill *infos)
+static char	**init_first_dimmension(int size)
+{
+	char **new;
+	if (!(new = (char**)malloc(sizeof(char*) * size)))
+		return (NULL);
+	while (size)
+		new[--size] = NULL;
+	return (new);
+}
+
+void			set_grid_size(t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -23,7 +33,6 @@ void	set_grid_size(t_fill *infos)
 	infos->gridsize.y =
 		ft_atoi(&(temp = ft_strstr(infos->currentline, "Plateau"))[7]);
 	temp = &temp[7];
-//	printf("TEMP:%s\n", temp);
 	while (ft_ispace(temp[count]))
 		count++;
 	while (ft_isdigit(temp[count]))
@@ -60,7 +69,7 @@ void	grid_parser(t_fill *infos)
 	line = 0;
 	if (infos->gridsize.y == -1)
 		set_grid_size(infos);
-	if (!(infos->grid = (char**)malloc(sizeof(char*) * infos->gridsize.y + 2)))
+	if (!(infos->grid = init_first_dimmension(infos->gridsize.y + 1)))
 		return ;
 	while (line < infos->gridsize.y)
 	{
@@ -68,7 +77,10 @@ void	grid_parser(t_fill *infos)
 		if (!infos->grid[line])
 			infos->grid[line] = ft_strnew(infos->gridsize.x + 1);
 		if (infos->grid[line] && ft_isdigit(*infos->currentline))
-			ft_strcpy(infos->grid[line++], &(infos->currentline)[4]);
+		{
+			printf("CURRENTLINE:%s\n", &infos->currentline[4]);
+			ft_strcpy(infos->grid[line++], &infos->currentline[4]);
+		}
 		get_next_line(0, &infos->currentline);
 	}
 	infos->grid[line] = 0;
