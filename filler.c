@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 12:53:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:57:55 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		if (!infos->playernum && ++infos->playernum)
+		ft_print_split(infos->currentpiece);
+		if (!infos->playernum)
+		{
 			default_player(infos);
+			infos->playernum = 1;
+		}
 		else
 			infos->playernum = 0;
 	}

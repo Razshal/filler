@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 16:21:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:19:40 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	set_piece_size(t_fill *infos)
 	while (!ft_strstr(infos->currentline, "Piece"))
 		get_next_line(0, &infos->currentline);
 	infos->piecesize.y = ft_atoi(temp =
-			(ft_strstr(infos->currentline, "Piece")));
+			&ft_strstr(infos->currentline, "Piece")[6]);
 	while (ft_ispace(temp[count]))
 		count++;
 	while (ft_isdigit(temp[count]))
@@ -83,18 +83,17 @@ void	grid_parser(t_fill *infos)
 		}
 		get_next_line(0, &infos->currentline);
 	}
-	infos->grid[line] = 0;
 }
 
 void	piece_parser(t_fill *infos)
 {
 	int		line;
-
 	line = 0;
 	set_piece_size(infos);
 	if (!(infos->currentpiece
-				= (char**)malloc(sizeof(char*) * infos->piecesize.x + 2)))
+				= init_first_dimmension(infos->piecesize.y + 2)))
 		return ;
+	printf("PIECESIZE.x:%d .y:%d\n", infos->piecesize.x, infos->piecesize.y);
 	while (line < infos->piecesize.y)
 	{
 		if (!infos->currentpiece[line])
@@ -105,5 +104,5 @@ void	piece_parser(t_fill *infos)
 			break;
 		get_next_line(0, &infos->currentline);
 	}
-	infos->currentpiece[line] = 0;
+	ft_print_split(infos->currentpiece);
 }
