@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 13:36:37 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:53:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static void default_player(t_fill *infos)
 
 	place.y = -5;
 	result = 0;
+
+
+	ft_putendl("2nd grid");
+	ft_print_split(infos->grid);
+
+
 	while (!result || place.y++ < infos->gridsize.y + 10)
 	{
 		place.x = -5;
@@ -55,19 +61,16 @@ int main(void)
 	while (!str || (!ft_strstr(str, "mfonteni.filler")
 				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
 		get_next_line(0, &str);
-	infos = (ft_strstr(str, "p1") ? structnew('O', 1) : structnew('X', 2));
+	infos = (ft_strstr(str, "p1") ? structnew('O', 0) : structnew('X', 1));
 	infos->currentline = str;
 	while (!ft_strstr(infos->currentline, "== O fin"))
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		while (!(ft_strstr(infos->currentline, "<got (")))
-		{
-			ft_putendl("ici");
-			get_next_line(0, &infos->currentline);
-		}
-		if ((ft_strstr(infos->currentline, "<got ("))[0] == infos->player)
+		if (!infos->playernum && ++infos->playernum)
 			default_player(infos);
+		else
+			infos->playernum = 0;
 	}
 }
 
