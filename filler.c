@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 18:11:17 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 19:40:24 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ static void default_player(t_fill *infos)
 	t_coord	place;
 	int		result;
 
-	place.y = -5;
+	place.y = 0;
 	result = 0;
-	while (!result || place.y++ < infos->gridsize.y + 10)
+	while (!result && place.y++ < infos->gridsize.y)
 	{
-		place.x = -5;
-		while (!(result = place_piece(infos, place, 0, 0)) ||
-				place.x < infos->gridsize.x + 10)
+		place.x = 0;
+		ft_putendl_fd("ICIIII", FD);
+		while (!(result = place_piece(infos, place, 0, 0)) &&
+				place.x < infos->gridsize.x)
 			place.x++;
 	}
 	ft_printf("%d %d\n", place.y, place.x);
@@ -61,13 +62,12 @@ int main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		if (!infos->playernum)
-		{
-			default_player(infos);
-			infos->playernum = 1;
-		}
-		else
-			infos->playernum = 0;
+		ft_putendl_fd("#######################line", FD);
+		ft_putendl_fd(infos->currentline, FD);
+		ft_putendl_fd("#######################piece", FD);
+		ft_print_split_fd(infos->currentpiece, FD);
+		ft_putendl_fd("#######################", FD);
+		default_player(infos);
 	}
 }
 

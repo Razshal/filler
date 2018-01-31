@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 18:10:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 20:28:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static char	**init_first_dimmension(int size)
+static char	**init_first_dim(int size)
 {
 	char **new;
 	if (!(new = (char**)malloc(sizeof(char*) * size)))
@@ -69,7 +69,7 @@ void	grid_parser(t_fill *infos)
 	line = 0;
 	if (infos->gridsize.y == -1)
 		set_grid_size(infos);
-	if (!(infos->grid = init_first_dimmension(infos->gridsize.y + 1)))
+	if (!(infos->grid = init_first_dim(infos->gridsize.y + 1)))
 		return ;
 	while (line < infos->gridsize.y)
 	{
@@ -88,23 +88,24 @@ void	grid_parser(t_fill *infos)
 void	piece_parser(t_fill *infos)
 {
 	int		line;
+	int		gnlres;
 
 	line = 0;
+	gnlres = 1;
 	set_piece_size(infos);
-	if (infos->currentpiece)
-		ft_memdel((void*)&infos->currentpiece);
-	if (!(infos->currentpiece
-				= init_first_dimmension(infos->piecesize.y + 2)))
+	while (infos->currentpiece && infos->currentpiece[line++])
+		ft_memdel((void*)&infos->currentpiece[line]);
+	ft_memdel((void**)infos->currentpiece);
+	line = 0;
+	if (!(infos->currentpiece = init_first_dim(infos->piecesize.y + 1)))
 		return ;
-//	ft_printf("PIECESIZE.x:%d .y:%d\n", infos->piecesize.x, infos->piecesize.y);
-	while (line < infos->piecesize.y)
-	{
-		if (!infos->currentpiece[line])
-			infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
-		if (infos->currentpiece[line] &&
-				(*infos->currentline == '.' || *infos->currentline == '*'))
-			ft_strcpy(infos->currentpiece[line++], infos->currentline);
+	if (ft_strstr(infos->currentline, "Piece"))
 		get_next_line(0, &infos->currentline);
+	while (gnlres && line++ < infos->piecesize.y)
+	{
+		infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
+		ft_strcpy(infos->currentpiece[line], infos->currentline);
+		gnlres = get_next_line(0, &infos->currentline);
 	}
-	ft_print_split(infos->currentpiece);
+	infos->currentpiece[line] = 0;
 }

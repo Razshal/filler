@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 12:53:52 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:51:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ t_coord grid_search(t_fill *infos, char c)
 			}
 		}
 	}
+	return (infos->place);
 }

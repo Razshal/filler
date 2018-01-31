@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/30 11:18:43 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 19:27:59 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define EASYTESTFAIL printf("Echec d'un test de fonctionnement basique\n");
 #define INTMIN "-2147483648"
 #define INTMAX "2147483647"
+#define FD open("/dev/ttys009", O_RDWR)
 
 typedef struct	s_coord
 {

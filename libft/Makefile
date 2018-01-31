@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/01/26 17:06:32 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/01/31 18:52:22 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $^
-	@echo "libft.a ready"
+	@echo "libftprintf.a ready"
 
 %.o:	%.c
 	@$(CC) $(FLAGS) -o $@ -c $<
