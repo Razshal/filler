@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 17:19:40 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:10:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			set_grid_size(t_fill *infos)
 	while (ft_ispace(temp[count]))
 		count++;
 	infos->gridsize.x = ft_atoi(&temp[count]);
-	printf("GRIDSIZE.x:%d .y:%d\n", infos->gridsize.x, infos->gridsize.y);
+//	printf("GRIDSIZE.x:%d .y:%d\n", infos->gridsize.x, infos->gridsize.y);
 }
 
 void	set_piece_size(t_fill *infos)
@@ -73,12 +73,12 @@ void	grid_parser(t_fill *infos)
 		return ;
 	while (line < infos->gridsize.y)
 	{
-		printf("LINE NUM:%d, LINE STATE:%s\n", line, infos->currentline);
+//		printf("LINE NUM:%d, LINE STATE:%s\n", line, infos->currentline);
 		if (!infos->grid[line])
 			infos->grid[line] = ft_strnew(infos->gridsize.x + 1);
 		if (infos->grid[line] && ft_isdigit(*infos->currentline))
 		{
-			printf("CURRENTLINE:%s\n", &infos->currentline[4]);
+//			printf("CURRENTLINE:%s\n", &infos->currentline[4]);
 			ft_strcpy(infos->grid[line++], &infos->currentline[4]);
 		}
 		get_next_line(0, &infos->currentline);
@@ -88,20 +88,22 @@ void	grid_parser(t_fill *infos)
 void	piece_parser(t_fill *infos)
 {
 	int		line;
+
 	line = 0;
 	set_piece_size(infos);
+	if (infos->currentpiece)
+		ft_memdel((void*)&infos->currentpiece);
 	if (!(infos->currentpiece
 				= init_first_dimmension(infos->piecesize.y + 2)))
 		return ;
-	printf("PIECESIZE.x:%d .y:%d\n", infos->piecesize.x, infos->piecesize.y);
+//	ft_printf("PIECESIZE.x:%d .y:%d\n", infos->piecesize.x, infos->piecesize.y);
 	while (line < infos->piecesize.y)
 	{
 		if (!infos->currentpiece[line])
 			infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
-		if (infos->currentpiece[line])
+		if (infos->currentpiece[line] &&
+				(*infos->currentline == '.' || *infos->currentline == '*'))
 			ft_strcpy(infos->currentpiece[line++], infos->currentline);
-		else
-			break;
 		get_next_line(0, &infos->currentline);
 	}
 	ft_print_split(infos->currentpiece);

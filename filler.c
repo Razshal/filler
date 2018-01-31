@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 16:57:55 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/01/31 18:11:17 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static void default_player(t_fill *infos)
 
 	place.y = -5;
 	result = 0;
-
-
-	ft_putendl("2nd grid");
-	ft_print_split(infos->grid);
-
-
 	while (!result || place.y++ < infos->gridsize.y + 10)
 	{
 		place.x = -5;
@@ -49,7 +43,7 @@ static void default_player(t_fill *infos)
 				place.x < infos->gridsize.x + 10)
 			place.x++;
 	}
-	ft_printf(" [%d, %d]\n", place.y, place.x);
+	ft_printf("%d %d\n", place.y, place.x);
 }
 
 int main(void)
@@ -67,7 +61,6 @@ int main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		ft_print_split(infos->currentpiece);
 		if (!infos->playernum)
 		{
 			default_player(infos);
