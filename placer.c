@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 16:45:14 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 18:39:49 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 static int	valid_placement(t_fill *infos, t_coord place, int line, int row)
 {
-	if (line > infos->piecesize.y || row > infos->piecesize.x
-			|| ((infos->currentpiece[line][row] == '*')
-			&& (line + place.y < 0 || line + place.y > infos->gridsize.y
-			|| row + place.x < 0 || row + place.x > infos->gridsize.x
-			|| (infos->grid[line + place.y][row + place.x] != '.'
-			&& infos->grid[line + place.y][row + place.x] != infos->player)))
-		)
+	if (infos->currentpiece[line][row] == '*'
+			&& !infos->grid[line + place.y])
 		return (0);
+
+	if (line > infos->piecesize.y
+			|| row > infos->piecesize.x
+			|| ((infos->currentpiece[line][row] == '*')))
+	{
+		if (line + place.y < 0
+				|| line + place.y > infos->gridsize.y
+				|| row + place.x < 0
+				|| row + place.x > infos->gridsize.x
+				|| (infos->grid[line + place.y][row + place.x] != '.'
+			&& infos->grid[line + place.y][row + place.x] != infos->player))
+		return (0);
+	}
 	return (1);
 }
 

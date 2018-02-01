@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/01/31 18:54:25 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/01 18:25:56 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) libft/ft_print_split.c -fsanitize=address -g3
+	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) libft/ft_print_split.c #-fsanitize=address -g3
 
 $(LIBFT):
 	make -C $(LIBDIR)

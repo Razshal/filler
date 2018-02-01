@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 16:37:32 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 18:42:31 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ static t_coord get_and_print_coordinates(t_fill *infos)
 
 	if (infos->place.x = -9999)
 		infos->place = grid_search(infos, infos->player);
-
-
-
 }*/
 
-static void default_player(t_fill *infos)
+static int default_player(t_fill *infos)
 {
 	t_coord	place;
 	int		result;
@@ -46,25 +43,30 @@ static void default_player(t_fill *infos)
 			infos->overflow = 0;
 		}
 	}
+	if (!result)
+		return (0);
 	ft_printf("%d %d\n", place.y, place.x);
+	return (1);
 }
 
 int main(void)
 {
 	t_fill	*infos;
 	char	*str;
+	int		res;
 
 	str = NULL;
+	res = 1;
 	while (!str || (!ft_strstr(str, "mfonteni.filler")
 				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
 		get_next_line(0, &str);
 	infos = (ft_strstr(str, "p1") ? structnew('O', 0) : structnew('X', 1));
 	infos->currentline = str;
-	while (!ft_strstr(infos->currentline, "== O fin"))
+	while (res)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		default_player(infos);
+		res = default_player(infos);
 	}
 }
 
