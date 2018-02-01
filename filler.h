@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 12:15:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 16:43:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define INTMIN "-2147483648"
 #define INTMAX "2147483647"
 #define FD open("/dev/ttys006", O_RDWR)
+#define CLOSE close(FD)
 
 typedef struct	s_coord
 {

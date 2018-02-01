@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 13:35:39 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 16:37:48 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void			set_grid_size(t_fill *infos)
 	while (ft_ispace(temp[count]))
 		count++;
 	infos->gridsize.x = ft_atoi(&temp[count]);
-//	printf("GRIDSIZE.x:%d .y:%d\n", infos->gridsize.x, infos->gridsize.y);
 }
 
 void	set_piece_size(t_fill *infos)
