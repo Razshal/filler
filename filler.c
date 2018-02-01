@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 18:42:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 19:07:33 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,23 @@ static int default_player(t_fill *infos)
 	t_coord	place;
 	int		result;
 
-	place.y = -1;
+	place.y = -5;
 	result = 0;
-	while (!result && place.y++ < infos->gridsize.y)
+	while (!result && place.y++ < infos->gridsize.y + 5)
 	{
-		place.x = -1;
-		while ((result = place_piece(infos, place, 0, 0)) != 1 &&
-				place.x < infos->gridsize.x)
+		place.x = -5;
+		while ((result = place_piece(infos, place, 0, 0)) != 1
+				&& place.x < infos->gridsize.x + 5)
 		{
 			place.x++;
 			infos->overflow = 0;
 		}
 	}
 	if (!result)
+	{
+		ft_putstr("0 0");
 		return (0);
+	}
 	ft_printf("%d %d\n", place.y, place.x);
 	return (1);
 }
