@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/31 19:40:24 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/01 13:10:55 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void default_player(t_fill *infos)
 
 	place.y = 0;
 	result = 0;
+		ft_putendl_fd("Player call", FD);
 	while (!result && place.y++ < infos->gridsize.y)
 	{
 		place.x = 0;
-		ft_putendl_fd("ICIIII", FD);
 		while (!(result = place_piece(infos, place, 0, 0)) &&
 				place.x < infos->gridsize.x)
 			place.x++;
@@ -51,6 +51,7 @@ int main(void)
 {
 	t_fill	*infos;
 	char	*str;
+	ft_putendl_fd("Init main loop", FD);
 
 	str = NULL;
 	while (!str || (!ft_strstr(str, "mfonteni.filler")
@@ -62,9 +63,7 @@ int main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		ft_putendl_fd("#######################line", FD);
-		ft_putendl_fd(infos->currentline, FD);
-		ft_putendl_fd("#######################piece", FD);
+		dprintf(FD, "#######################piece\n");
 		ft_print_split_fd(infos->currentpiece, FD);
 		ft_putendl_fd("#######################", FD);
 		default_player(infos);
