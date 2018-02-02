@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 13:17:16 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:31:19 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,6 @@ static void get_closest_coordinates_from_ennemy(t_fill *infos)
 	
 
 }*/
-
-static int default_player(t_fill *infos)
-{
-	t_coord	place;
-	int		result;
-
-	place.y = -infos->piecesize.y;
-	result = 0;
-	while (!result && place.y++ < infos->gridsize.y + 5)
-	{
-		place.x = -infos->piecesize.x;
-		while ((result = place_piece(infos, place, 0, 0)) != 1
-				&& place.x < infos->gridsize.x + 5)
-		{
-			place.x++;
-			infos->overflow = 0;
-		}
-	}
-	if (!result)
-	{
-		ft_putstr("0 0");
-		return (0);
-	}
-	ft_printf("%d %d\n", place.y, place.x);
-	infos->place = place;
-	return (1);
-}
 
 int main(void)
 {
@@ -66,7 +39,7 @@ int main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		res = default_player(infos);
+		res = player_ai(infos);
 	}
 	structdel(infos);
 }

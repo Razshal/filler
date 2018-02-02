@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/02 13:14:44 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/02 15:31:38 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = filler.c \
 	  parsers.c \
 	  placer.c \
 	  structs.c \
-	  grid_fuctions.c \
+	  grid_functions.c \
 	  playerai.c
 
 OBJ = $(SRC:.c=.o)
