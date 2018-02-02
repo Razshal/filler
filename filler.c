@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 19:07:33 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/02 13:17:16 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 /*
 static void get_closest_coordinates_from_ennemy(t_fill *infos)
 {
-	if (ennemy.x < infos->place.x)
+	int		leftside;
+	t_coord	ennemy;
 
-}
+	leftside = ennemy.x < infos->place.x ? 1 : 0;
+	
 
-static t_coord get_and_print_coordinates(t_fill *infos)
-{
-	t_coord place;
-
-	if (infos->place.x = -9999)
-		infos->place = grid_search(infos, infos->player);
 }*/
 
 static int default_player(t_fill *infos)
@@ -31,11 +27,11 @@ static int default_player(t_fill *infos)
 	t_coord	place;
 	int		result;
 
-	place.y = -5;
+	place.y = -infos->piecesize.y;
 	result = 0;
 	while (!result && place.y++ < infos->gridsize.y + 5)
 	{
-		place.x = -5;
+		place.x = -infos->piecesize.x;
 		while ((result = place_piece(infos, place, 0, 0)) != 1
 				&& place.x < infos->gridsize.x + 5)
 		{
@@ -49,6 +45,7 @@ static int default_player(t_fill *infos)
 		return (0);
 	}
 	ft_printf("%d %d\n", place.y, place.x);
+	infos->place = place;
 	return (1);
 }
 
@@ -71,5 +68,6 @@ int main(void)
 		piece_parser(infos);
 		res = default_player(infos);
 	}
+	structdel(infos);
 }
 

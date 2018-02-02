@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid_functions.c                                   :+:      :+:    :+:   */
+/*   playerai.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 13:49:49 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/02/02 13:54:54 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-t_coord grid_search(t_fill *infos, char c)
+static void get_closest_coordinates_from_ennemy(t_fill *infos)
 {
-	int		line;
-	int		row;
-	t_coord	place;
+	int		leftside;
+	t_coord	ennemy;
 
-	line = 0;
-	while (infos->grid[line++])
-	{
-		row = 0;
-		while (infos->grid[line][row++])
-		{
-			if (infos->grid[line][row] == c)
-			{
-				place.y = line;
-				place.x = row;
-				return (place);
-			}
-		}
-	}
-	place.x = -1;
-	return (place);
+	ennemy = grid_search(infos, (infos->player = 'X' ? 'o' : 'x'));
+	if (ennemy.x < 0)
+		ennemy = grid_search(infos, (infos->player = 'X' ? 'O' : 'X'));
+	leftside = ennemy.x < infos->place.x ? 1 : 0;
+	//if he's on left try from begin to me, if he's on right try from me to begin
+
+
+	ft_memdel((void*)&ennemy);
 }

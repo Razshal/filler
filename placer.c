@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 18:39:49 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/02 12:02:35 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	valid_placement(t_fill *infos, t_coord place, int line, int row)
 				|| row + place.x < 0
 				|| row + place.x > infos->gridsize.x
 				|| (infos->grid[line + place.y][row + place.x] != '.'
-			&& infos->grid[line + place.y][row + place.x] != infos->player))
-		return (0);
+				&& infos->grid[line + place.y][row + place.x] != infos->player))
+			return (0);
 	}
 	return (1);
 }

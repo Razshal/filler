@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 16:43:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/02 13:32:21 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ typedef	struct	s_fill
 }				t_fill;
 
 t_fill			*structnew(char player, int playernum);
+void			structdel(t_fill *struc);
 void			set_grid_size(t_fill *infos);
 void			set_piece_size(t_fill *infos);
 void			grid_parser(t_fill *infos);
 void			piece_parser(t_fill *infos);
 int				place_piece(t_fill *infos, t_coord place, int line, int row);
+t_coord			grid_search(t_fill *infos, char c);
 
 #endif
