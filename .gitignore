@@ -5,4 +5,4 @@ main.c
 *.swp
 *.swo
 *.ghc
-*dSYM*
+*.dSYM/
