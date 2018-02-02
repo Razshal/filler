@@ -6,3 +6,4 @@ main.c
 *.swo
 *.ghc
 *.dSYM/
+*.filler
