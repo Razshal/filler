@@ -6,21 +6,11 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 15:31:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:33:58 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-/*
-static void get_closest_coordinates_from_ennemy(t_fill *infos)
-{
-	int		leftside;
-	t_coord	ennemy;
-
-	leftside = ennemy.x < infos->place.x ? 1 : 0;
-	
-
-}*/
 
 int main(void)
 {
@@ -43,4 +33,3 @@ int main(void)
 	}
 	structdel(infos);
 }
-
