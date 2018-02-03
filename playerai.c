@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/03 16:56:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:54:26 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	search_in_subgrid(t_fill *infos)
 	t_coord	try;
 	t_coord	ennemy;
 	int		res;
+
 	res = 0;
 	ennemy = ennemypos(infos);
 	try = ennemy;
@@ -88,6 +89,14 @@ static int	default_player(t_fill *infos)
 	ft_printf("%d %d\n", place.y, place.x);
 	infos->place = place;
 	return (1);
+}
+
+static int	arround_ennemy(t_fill *infos)
+{
+	t_coord ennemy;
+
+	ennemy = ennemypos(infos);
+//here will be a function who search arround the ennemy the clooser coordinate
 }
 
 int	player_ai(t_fill *infos)
