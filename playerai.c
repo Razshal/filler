@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/09 18:53:17 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/09 19:03:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	right_side(t_fill *infos, t_coord enmy, int cur)
 	int res;
 	t_coord pos;
 
-	dprintf(FD, "Right pos.x %d\n", pos.x);
 	res = 0;
 	pos.x = enmy.x + cur;
 	pos.y = enmy.y - cur;
@@ -40,7 +39,6 @@ static int	left_side(t_fill *infos, t_coord enmy, int cur)
 	int res;
 	t_coord pos;
 
-	dprintf(FD, "Left pos.x %d\n", pos.x);
 	res = 0;
 	pos.x = enmy.x - cur;
 	pos.y = enmy.y + cur;
@@ -67,8 +65,8 @@ static int	arround_enmy(t_fill *infos)
 	cur = 0;
 	res = 0;
 	enmy = enmypos(infos);
-	while (!res && (cur < infos->piecesize.y + infos->gridsize.y - enmy.y
-				|| cur < infos->piecesize.x + infos->gridsize.x - enmy.x))
+	while (!res && (cur < infos->piecesize.y + infos->gridsize.y
+				|| cur < infos->piecesize.x + infos->gridsize.x))
 	{
 		if (infos->place.y < enmy.y)
 			res = right_side(infos, enmy, cur);
@@ -82,6 +80,26 @@ static int	arround_enmy(t_fill *infos)
 	return (1);
 }
 
+static int	default_player(t_fill *infos)
+{
+	t_coord	place;
+	int		result;
+
+	place.y = -infos->piecesize.y;
+	result = 0;
+	while (!result && place.y++ < infos->gridsize.y + 5)
+	{
+		place.x = -infos->piecesize.x;
+		while ((result = place_piece(infos, place, 0, 0)) != 1
+				&& place.x < infos->gridsize.x + 5)
+			place.x++;
+	}
+	if (!result)
+		return (0);
+	ft_printf("%d %d\n", place.y, place.x);
+	infos->place = place;
+	return (1);
+}
 
 int	player_ai(t_fill *infos)
 {
@@ -89,6 +107,8 @@ int	player_ai(t_fill *infos)
 
 	enmy = enmypos(infos);
 	if (arround_enmy(infos))
+		return (1);
+	else if (default_player(infos))
 		return (1);
 	ft_putendl("0 0");
 	return (0);
