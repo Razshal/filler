@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 16:10:12 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:34:25 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,23 @@ static int	valid_placement(t_fill *infos, t_coord place, int line, int row)
 	}
 	return (1);
 }
+
+/*
+static void	whereami(t_fill *infos, t_coord pos)
+{
+	char c;
+	if (pos.y < infos->gridsize.y && pos.x < infos->gridsize.x && pos.y >= 0 && pos.x >= 0)
+	{
+		c = infos->grid[pos.y][pos.x];
+		infos->grid[pos.y][pos.x] = 'A';
+	}
+	else c = -1;
+	ft_print_split_fd(infos->grid, FD);
+	if (c > -1)
+		infos->grid[pos.y][pos.x] = c;
+	usleep(500);
+}
+*/
 
 int		place_piece(t_fill *infos, t_coord place, int line, int row)
 {
