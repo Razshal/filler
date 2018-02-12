@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/12 17:09:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/12 19:19:25 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,13 @@ static int	border_player(t_fill *infos)
 	while (!res && enmy.x != -1
 			&& (cur < infos->piecesize.y + infos->gridsize.y
 			|| cur < infos->piecesize.x + infos->gridsize.x))
-		res = right_side(infos, enmy, cur++);
+	{
+		if (infos->place.y < enmy.y)
+			res = right_side(infos, enmy, cur);
+		else
+			res = left_side(infos, enmy, cur);
+		cur++;
+	}
 	if (!res)
 		return (0);
 	ft_printf("%d %d\n", infos->place.y, infos->place.x);
