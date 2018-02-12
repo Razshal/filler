@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 15:33:58 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/12 15:11:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main(void)
 	while (res)
 	{
 		grid_parser(infos);
+		initpos(infos);
 		piece_parser(infos);
 		res = player_ai(infos);
 	}

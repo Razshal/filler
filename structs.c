@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:20:07 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/02 13:22:12 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/12 12:50:55 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ t_fill	*structnew(char player, int playernum)
 	new->place.x = 0;
 	new->currentpiece = NULL;
 	new->overflow = 0;
+	new->playerinit.x = -1;
+	new->playerinit.y = -1;
+	new->enmyinit.x = -1;
+	new->enmyinit.y = -1;
 	return (new);
 }
 

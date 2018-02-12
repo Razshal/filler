@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/09 15:40:52 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:16:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,51 @@ t_coord	enmypos(t_fill *infos)
 	if (enmy.x < 0)
 		enmy = grid_search(infos, (infos->player == 'X' ? 'O' : 'X'));
 	return (enmy);
+}
+
+void	initpos(t_fill *infos)
+{
+	if (infos->enmyinit.y == -1)
+		infos->enmyinit = grid_search(infos,
+				(infos->player == 'X' ? 'O' : 'X'));
+	if (infos->playerinit.y == - 1)
+		infos->playerinit = grid_search(infos, infos->player);
+}
+
+int		scan_side(t_fill *infos, int x, char c)
+{
+	int y;
+
+	y = 0;
+	while (y < infos->gridsize.y)
+	{
+		if (infos->grid[y++][x] == c)
+			return (1);
+	}
+	return (0);
+}
+
+t_coord	side_to_fill(t_fill *infos)
+{
+	t_coord	pos;
+
+	pos.x = infos->playerinit.x < infos->enmyinit.x ? infos->gridsize.x - 1 : 0;
+	pos.y = infos->gridsize.y / 2;
+
+	if (scan_side(infos, pos.x, infos->player) && scan_side(infos,
+				(pos.x == 0 ? infos->gridsize.x - 1 : 0), infos->player))
+	{
+		pos.x = -1;
+		pos.y = -1;
+		return (pos);
+	}
+	if (scan_side(infos, pos.x, infos->player))
+		return (infos->playerinit);
+	else
+	{
+		pos.y = 0;
+		while (infos->grid[pos.y] && infos->grid[pos.y][pos.x] != '.')
+			pos.y++;
+	}
+	return (pos);
 }
