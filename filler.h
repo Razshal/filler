@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/12 19:28:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:22:36 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define FD open("/dev/ttys000", O_RDWR)
+#define FD open("/dev/ttys006", O_RDWR)
 #define CLOSE close(FD)
 
 #define ENMYCHAR (infos->player == 'X' ? 'X' : 'O')
@@ -58,5 +58,8 @@ t_coord			enmypos(t_fill *infos);
 void			initpos(t_fill *infos);
 t_coord			side_to_fill(t_fill *infos);
 int				scan_row(t_fill *infos, int x, char c);
+int				right_side(t_fill *infos, t_coord enmy, int cur);
+int				left_side(t_fill *infos, t_coord enmy, int cur);
+int				default_player(t_fill *infos);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/09 11:38:09 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/14 12:05:21 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC = filler.c \
 	  placer.c \
 	  structs.c \
 	  grid_functions.c \
-	  playerai.c
+	  playerai.c \
+	  playeraifunctions.c
 
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
