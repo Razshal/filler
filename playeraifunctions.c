@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:04:16 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 13:18:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:48:38 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int	right_side(t_fill *infos, t_coord enmy, int cur)
 	t_coord pos;
 
 	res = 0;
-	pos.x = enmy.x + cur;
+	pos.x = enmy.x - cur;
 	pos.y = enmy.y - cur;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x > enmy.x - cur)
-		pos.x--;
-	pos.x = enmy.x + cur;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y < enmy.y + cur)
-		pos.y++;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x > enmy.x - cur)
-		pos.x--;
 	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y > enmy.y - cur)
 		pos.y--;
+	pos.y = enmy.y - cur;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x < enmy.x + cur)
+		pos.x++;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y > enmy.y - cur)
+		pos.y--;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x > enmy.x - cur)
+		pos.x--;
 	if (res)
 		infos->place = pos;
 	return (res);
@@ -56,48 +56,55 @@ int	left_side(t_fill *infos, t_coord enmy, int cur)
 	return (res);
 }
 
-int	default_player(t_fill *infos)
-{
-	t_coord	place;
-	int		result;
-
-	place.y = -infos->piecesize.y;
-	result = 0;
-	while (!result && place.y++ < infos->gridsize.y + 5)
-	{
-		place.x = -infos->piecesize.x;
-		while ((result = place_piece(infos, place, 0, 0)) != 1
-				&& place.x < infos->gridsize.x + 5)
-			place.x++;
-	}
-	if (!result)
-		return (0);
-	ft_printf("%d %d\n", place.y, place.x);
-	infos->place = place;
-	return (1);
-}
-
-t_coord	side_to_fill(t_fill *infos)
+t_coord	side_to_fill_x(t_fill *infos)
 {
 	t_coord	pos;
+	t_coord fail;
 
-	pos.x = infos->playerinit.x < infos->enmyinit.x ? infos->gridsize.x - 1 : 0;
-	pos.y = infos->player == 'X' ?
-		infos->gridsize.y - 1 : infos->gridsize.y - infos->gridsize.y / 3;
-	if ((scan_row(infos, pos.x, ENMYCHAR) > infos->gridsize.x / 2)
-		|| (scan_row(infos, pos.y, infos->player) && scan_row(infos,
-		(pos.x == 0 ? infos->gridsize.x - 1 : 0), infos->player)))
+	pos.x = 0;
+	pos.y = infos->gridsize.y - 1;
+	fail.x = -1;
+	fail.y = -1;
+	if ((scan_row(infos, pos.y, infos->player)
+			&& scan_row(infos, infos->gridsize.x - 1, infos->player)))
+		return (fail);
+	if (scan_row(infos, pos.x, infos->player))
 	{
-		pos.x = -1;
-		pos.y = -1;
+		pos.y = infos->playerinit.y;
+		pos.x = infos->gridsize.x - 1;
 		return (pos);
 	}
-	if (scan_row(infos, pos.x, infos->player))
-		return (infos->playerinit);
-	else
+	else if (!(scan_row(infos, pos.x, infos->player)))
 	{
-		while (infos->grid[pos.y] && infos->grid[pos.y][pos.x] != '.')
+		while (infos->player == 'X' &&
+				infos->grid[pos.y] && infos->grid[pos.y][pos.x] != '.')
 			pos.y++;
+	}
+	return (pos);
+}
+
+t_coord	side_to_fill_o(t_fill *infos)
+{
+	t_coord	pos;
+	t_coord fail;
+
+	pos.x = infos->gridsize.x - 1;
+	pos.y = infos->gridsize.y - infos->gridsize.y / 3;
+	fail.x = -1;
+	fail.y = -1;
+	if ((scan_row(infos, pos.y, infos->player)
+			&& scan_row(infos, 0, infos->player)))
+		return (fail);
+	if (scan_row(infos, pos.x, infos->player))
+	{
+		pos.y = infos->playerinit.y;
+		pos.x = 0;
+		return (pos);
+	}
+	else if (!(scan_row(infos, pos.x, infos->player)))
+	{
+		while (pos.y > -1 && infos->grid[pos.y][pos.x] != '.')
+			pos.y--;
 	}
 	return (pos);
 }

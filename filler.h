@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 12:22:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:34:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ t_coord			grid_search(t_fill *infos, char c);
 int				player_ai(t_fill *infos);
 t_coord			enmypos(t_fill *infos);
 void			initpos(t_fill *infos);
-t_coord			side_to_fill(t_fill *infos);
+t_coord			side_to_fill_o(t_fill *infos);
+t_coord			side_to_fill_x(t_fill *infos);
 int				scan_row(t_fill *infos, int x, char c);
 int				right_side(t_fill *infos, t_coord enmy, int cur);
 int				left_side(t_fill *infos, t_coord enmy, int cur);
 int				default_player(t_fill *infos);
+int				close_to_the_coord(t_fill *infos, t_coord pos);
 
 #endif
