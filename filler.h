@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 15:10:49 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 19:10:10 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FILLER_H
 # include "libft/includes/libft.h"
 # define ENMYCHAR (infos->player == 'X' ? 'X' : 'O')
+# define NOTHING -1
+# define ME -2
+# define ENNEMY -3
+# define ENNEMYLASTPOS -4
 
 typedef struct	s_coord
 {
