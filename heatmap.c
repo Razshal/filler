@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 19:43:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:05:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ennemy_border(t_fill *infos, t_coord pos)
 	return (0);
 }
 
-static void	heating_grid(t_fill *infos, t_coord pos)
+static void		heating_grid(t_fill *infos, t_coord pos)
 {
 	int min;
 
@@ -50,7 +50,7 @@ static void	heating_grid(t_fill *infos, t_coord pos)
 		infos->grid[pos.y][pos.x] = min + 1;
 }
 
-int		heatmap_init(t_fill *infos)
+int			heatmap_init(t_fill *infos)
 {
 	t_coord	pos;
 	int		emptycases;
@@ -69,4 +69,45 @@ int		heatmap_init(t_fill *infos)
 		}
 	}
 	return (emptycases == 0 ? 1 : heatmap_init(infos));
+}
+
+static t_coord	heatmap_get_best_point(t_fill *infos, int decal)
+{
+	t_coord	pos;
+	t_coord	final_pos;
+	int		bestvalue;
+
+	bestvalue = 2147483647;
+	pos.x = 0;
+	pos.y = 0;
+	while (pos.y++ < infos->gridsize.y)
+	{
+		while (pos.x++ < infos->gridsize.x)
+		{
+			if (infos->grid[pos.y][pos.x] > 0
+					&& infos->grid[pos.y][pos.x] < bestvalue && !decal--)
+			{
+				final_pos = pos;
+				bestvalue = infos->grid[pos.y][pos.x];
+			}
+		}
+	}
+	return (final_pos);
+}
+
+// TODO : Finishing placement test, idk if I have to decal the piece or just testing random pos
+
+int		heatmap_search(t_fill *infos)
+{
+	int		decal;
+	t_coord best_pos;
+	int		res;
+
+	decal = 0;
+	res = 0;
+	while (!res)
+	{
+		res = place_piece(infos, heatmap_get_best_point(infos, decal), 0, 0);
+		while (
+	}
 }
