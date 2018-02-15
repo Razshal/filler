@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:04:16 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 13:44:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:46:00 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int		right_side(t_fill *infos, t_coord enmy, int cur)
 	t_coord	pos;
 
 	res = 0;
-	pos.x = enmy.x - cur;
-	pos.y = enmy.y + cur;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y > enmy.y - cur)
-		pos.y--;
-	pos.y = enmy.y + cur;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x < enmy.x + cur)
-		pos.x++;
-	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y > enmy.y - cur)
-		pos.y--;
+	pos.x = enmy.x + cur;
+	pos.y = enmy.y - cur;
 	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x > enmy.x - cur)
 		pos.x--;
+	pos.x = enmy.x + cur;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y < enmy.y + cur)
+		pos.y++;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.x > enmy.x - cur)
+		pos.x--;
+	while (!(res = place_piece(infos, pos, 0, 0)) && pos.y > enmy.y - cur)
+		pos.y--;
 	if (res)
 		infos->place = pos;
 	return (res);
@@ -102,27 +102,26 @@ t_coord	side_to_fill_x(t_fill *infos)
 
 t_coord	side_to_fill_o(t_fill *infos)
 {
-	t_coord pos;
-	t_coord fail;
+	t_coord	pos;
 
 	pos.x = infos->gridsize.x - 1;
-	pos.y = infos->playerinit.y;
-	fail.x = -9999;
-	if (infos->gridsize.y < 16)
-		return (fail);
-	if ((scan_row(infos, pos.x, infos->player)
-			&& scan_row(infos, 0, infos->player)))
-		return (fail);
-	if (scan_row(infos, pos.x, infos->player))
+	pos.y = infos->gridsize.y / 2;
+	
+	if ((scan_row(infos, pos.x, ENMYCHAR) > infos->gridsize.x / 3)
+		|| (scan_row(infos, pos.x, infos->player) && scan_row(infos,
+		(pos.x == 0 ? infos->gridsize.x - 1 : 0), infos->player)))
 	{
-		pos.y = infos->playerinit.y;
-		pos.x = 0;
+		pos.x = -1;
+		pos.y = -1;
 		return (pos);
 	}
-	else if (!(scan_row(infos, pos.x, infos->player)))
+	if (scan_row(infos, pos.x, infos->player))
+		return (infos->playerinit);
+	else
 	{
-		while (pos.y > -1 && infos->grid[pos.y][pos.x] != '.')
-			pos.y--;
+		pos.y = 0;
+		while (infos->grid[pos.y] && infos->grid[pos.y][pos.x] != '.')
+			pos.y++;
 	}
 	return (pos);
 }
