@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:48:37 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:42:28 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	border_player(t_fill *infos)
 	res = 0;
 	enmy = infos->playerinit.x < infos->enmyinit.x ?
 		side_to_fill_o(infos) : side_to_fill_x(infos);
-	while (!res && enmy.x != -1
+	while (!res && enmy.x != -9999
 			&& (cur < infos->piecesize.y + infos->gridsize.y
 			|| cur < infos->piecesize.x + infos->gridsize.x))
 	{
@@ -62,7 +62,7 @@ static int	border_player(t_fill *infos)
 	return (1);
 }
 
-int	default_player(t_fill *infos)
+int			default_player(t_fill *infos)
 {
 	t_coord	place;
 	int		result;
@@ -83,29 +83,14 @@ int	default_player(t_fill *infos)
 	return (1);
 }
 
-int	player_ai(t_fill *infos)
+int			player_ai(t_fill *infos)
 {
-	t_coord enmy;
-	static int bord = 0;
-	static int arround = 0;
-	static int defaultp = 0;
-
-	enmy = enmypos(infos);
 	if (border_player(infos))
-	{
-		dprintf(FD, "borderplayer %d\n", bord++); fflush(stdout);
 		return (1);
-	}
 	else if (arround_enmy(infos))
-	{
-		dprintf(FD, "arround enmy %d\n", arround++);
 		return (1);
-	}
 	else if (default_player(infos))
-	{
-		dprintf(FD, "default player %d\n", defaultp++);
 		return (1);
-	}
 	ft_putendl("0 0");
 	return (0);
 }

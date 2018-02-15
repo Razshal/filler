@@ -6,23 +6,15 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 18:34:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:34:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
-#define FILLER_H
-#include "libft/includes/libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-#define FD open("/dev/ttys006", O_RDWR)
-#define CLOSE close(FD)
-
-#define ENMYCHAR (infos->player == 'X' ? 'X' : 'O')
+# define FILLER_H
+# include "libft/includes/libft.h"
+# include <stdlib.h>
+# define ENMYCHAR (infos->player == 'X' ? 'X' : 'O')
 
 typedef struct	s_coord
 {

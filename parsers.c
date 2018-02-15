@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/01 16:37:48 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:39:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char	**init_first_dim(int size)
 {
 	char **new;
+
 	if (!(new = (char**)malloc(sizeof(char*) * size)))
 		return (NULL);
 	while (size)
@@ -22,7 +23,7 @@ static char	**init_first_dim(int size)
 	return (new);
 }
 
-void			set_grid_size(t_fill *infos)
+void		set_grid_size(t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -42,7 +43,7 @@ void			set_grid_size(t_fill *infos)
 	infos->gridsize.x = ft_atoi(&temp[count]);
 }
 
-void	set_piece_size(t_fill *infos)
+void		set_piece_size(t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -50,8 +51,8 @@ void	set_piece_size(t_fill *infos)
 	count = 0;
 	while (!ft_strstr(infos->currentline, "Piece"))
 		get_next_line(0, &infos->currentline);
-	infos->piecesize.y = ft_atoi(temp =
-			&ft_strstr(infos->currentline, "Piece")[6]);
+	temp = &ft_strstr(infos->currentline, "Piece")[6];
+	infos->piecesize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
 		count++;
 	while (ft_isdigit(temp[count]))
@@ -61,7 +62,7 @@ void	set_piece_size(t_fill *infos)
 	infos->piecesize.x = ft_atoi(&temp[count]);
 }
 
-void	grid_parser(t_fill *infos)
+void		grid_parser(t_fill *infos)
 {
 	int		line;
 
@@ -80,7 +81,7 @@ void	grid_parser(t_fill *infos)
 	}
 }
 
-void	piece_parser(t_fill *infos)
+void		piece_parser(t_fill *infos)
 {
 	int		line;
 

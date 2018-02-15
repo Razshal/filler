@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 10:54:48 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 12:15:52 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:35:48 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-t_coord grid_search(t_fill *infos, char c)
+t_coord	grid_search(t_fill *infos, char c)
 {
 	int		line;
 	int		row;
@@ -51,7 +51,7 @@ void	initpos(t_fill *infos)
 	if (infos->enmyinit.y == -1)
 		infos->enmyinit = grid_search(infos,
 				(infos->player == 'X' ? 'O' : 'X'));
-	if (infos->playerinit.y == - 1)
+	if (infos->playerinit.y == -1)
 		infos->playerinit = grid_search(infos, infos->player);
 }
 
@@ -69,5 +69,3 @@ int		scan_row(t_fill *infos, int x, char c)
 	}
 	return (count);
 }
-
-

@@ -6,11 +6,11 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/01/31 18:52:22 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/15 13:32:34 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libftprintf.a
 PRINTFUNC = printf_functions/
 SRC = ft_atoi.c \
 	  ft_bzero.c \

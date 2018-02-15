@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/14 15:35:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:34:37 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int main(void)
+int	main(void)
 {
 	t_fill	*infos;
 	char	*str;
