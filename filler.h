@@ -6,14 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 13:34:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:10:49 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 # include "libft/includes/libft.h"
-# include <stdlib.h>
 # define ENMYCHAR (infos->player == 'X' ? 'X' : 'O')
 
 typedef struct	s_coord
@@ -53,7 +52,6 @@ t_coord			side_to_fill_x(t_fill *infos);
 int				scan_row(t_fill *infos, int x, char c);
 int				right_side(t_fill *infos, t_coord enmy, int cur);
 int				left_side(t_fill *infos, t_coord enmy, int cur);
-int				default_player(t_fill *infos);
 int				close_to_the_coord(t_fill *infos, t_coord pos);
 
 #endif

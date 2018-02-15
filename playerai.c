@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:17:39 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 13:42:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:11:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	border_player(t_fill *infos)
 	return (1);
 }
 
-int			default_player(t_fill *infos)
+static int	default_player(t_fill *infos)
 {
 	t_coord	place;
 	int		result;
