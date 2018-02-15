@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:04:16 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 14:46:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:57:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ t_coord	side_to_fill_o(t_fill *infos)
 
 	pos.x = infos->gridsize.x - 1;
 	pos.y = infos->gridsize.y / 2;
-	
 	if ((scan_row(infos, pos.x, ENMYCHAR) > infos->gridsize.x / 3)
 		|| (scan_row(infos, pos.x, infos->player) && scan_row(infos,
 		(pos.x == 0 ? infos->gridsize.x - 1 : 0), infos->player)))
