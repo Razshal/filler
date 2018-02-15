@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:04:16 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 14:57:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:04:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		right_side(t_fill *infos, t_coord enmy, int cur)
+int				right_side(t_fill *infos, t_coord enmy, int cur)
 {
 	int		res;
 	t_coord	pos;
@@ -34,7 +34,7 @@ int		right_side(t_fill *infos, t_coord enmy, int cur)
 	return (res);
 }
 
-int		left_side(t_fill *infos, t_coord enmy, int cur)
+int				left_side(t_fill *infos, t_coord enmy, int cur)
 {
 	int		res;
 	t_coord	pos;
@@ -56,7 +56,7 @@ int		left_side(t_fill *infos, t_coord enmy, int cur)
 	return (res);
 }
 
-t_coord	rush_b(t_fill *infos)
+static t_coord	rush_b(t_fill *infos)
 {
 	t_coord	pos;
 	int		res;
@@ -74,7 +74,7 @@ t_coord	rush_b(t_fill *infos)
 	return (pos);
 }
 
-t_coord	side_to_fill_x(t_fill *infos)
+t_coord			side_to_fill_x(t_fill *infos)
 {
 	t_coord pos;
 	t_coord fail;
@@ -100,7 +100,7 @@ t_coord	side_to_fill_x(t_fill *infos)
 	return (pos);
 }
 
-t_coord	side_to_fill_o(t_fill *infos)
+t_coord			side_to_fill_o(t_fill *infos)
 {
 	t_coord	pos;
 
