@@ -7,3 +7,5 @@ main.c
 *.ghc
 *.dSYM/
 *.filler
+*.trace
+out
