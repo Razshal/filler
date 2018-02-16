@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 13:39:18 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:30:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void		set_grid_size(t_fill *infos)
 	count = 0;
 	while (!ft_strstr(infos->currentline, "Plateau"))
 		get_next_line(0, &infos->currentline);
-	infos->gridsize.y =
-		ft_atoi(&(temp = ft_strstr(infos->currentline, "Plateau"))[7]);
-	temp = &temp[7];
+	temp = &ft_strstr(infos->currentline, "Plateau")[7];
+	infos->gridsize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
 		count++;
 	while (ft_isdigit(temp[count]))
