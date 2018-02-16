@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:39:50 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 19:42:11 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:50:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ int		heatmap_init(t_fill *infos)
 	int row;
 
 	line = 0;
-	row = 0;
-	while (line < infos->gridsize.y)
+	if (!infos->heatmap && !create_array(infos))
+		return (0);
+	while (infos->grid[line])
+	{
+		row = 0;
+		while (infos->grid[line][row])
+		{
+			if (infos->grid[line][row] == '.')
+				infos->heatmap[line][row] = NOTHING;
+			if (infos->grid[line][row] == PLAYERCHAR)
+				infos->heatmap[line][row] = PLAYER;
+			if (infos->grid[line][row] == ENNEMYCHAR)
+				infos->heatmap[line][row] = ENNEMY;
+			if (infos->grid[line][row] == ENNEMYPOSCHAR)
+				infos->heatmap[line][row] = ENNEMYLASTPOS;
+			row++;
+		}
+		line++;
+	}
+	return (1);
 }

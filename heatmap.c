@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 19:42:10 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:52:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void		heating_grid(t_fill *infos, t_coord pos)
 	int min;
 
 	min = 2147483647;
-	if (infos->grid[pos.y][pos.x] != NOTHING)
+	if (infos->grid[pos.y][pos.x] != NOTHING
+			|| infos->grid[pos.y][pos.x] != PLAYER)
 		return ;
 	min = test_case(infos, pos.y + 1, pos.x, min);
 	min = test_case(infos, pos.y - 1, pos.x, min);
@@ -51,7 +52,7 @@ int				heatmap_fill(t_fill *infos)
 
 	pos.y = 0;
 	emptycases = 0;
-	if (!infos->heatmap && !create_array(infos))
+	if (!heatmap_init(infos))
 		return (0);
 	while (pos.y < infos->gridsize.y)
 	{
