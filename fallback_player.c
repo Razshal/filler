@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.c                                           :+:      :+:    :+:   */
+/*   fallback_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 14:26:12 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/02/16 14:25:10 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/02/16 14:27:16 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	main(void)
+int	default_player(t_fill *infos)
 {
-	t_fill	*infos;
-	char	*str;
-	int		res;
+	t_coord	place;
+	int		result;
 
-	str = NULL;
-	res = 1;
-	while (!str || (!ft_strstr(str, "mfonteni.filler")
-				&& (!ft_strstr(str, "p1") || !ft_strstr(str, "p2"))))
-		get_next_line(0, &str);
-	infos = (ft_strstr(str, "p1") ? structnew('O', 0) : structnew('X', 1));
-	infos->currentline = str;
-	while (res)
+	place.y = -infos->piecesize.y;
+	result = 0;
+	while (!result && place.y++ < infos->gridsize.y + 5)
 	{
-		grid_parser(infos);
-		piece_parser(infos);
-		res = player_ai(infos);
+		place.x = -infos->piecesize.x;
+		while ((result = place_piece(infos, place, 0, 0)) != 1
+				&& place.x < infos->gridsize.x + 5)
+			place.x++;
 	}
-	structdel(infos);
+	if (!result)
+		return (0);
+	ft_printf("%d %d\n", place.y, place.x);
+	infos->place = place;
+	return (1);
 }
