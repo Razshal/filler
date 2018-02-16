@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 16:43:47 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 18:35:44 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 20:51:41 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@ void display_grid(t_fill *infos)
 		row = -1;
 		while (++row < infos->gridsize.x)
 		{
-			if (infos->grid[line][row] == PLAYER)
+			if (infos->heatmap[line][row] == PLAYER)
 				ft_putchar_fd(infos->player, FD);
-			else if (infos->grid[line][row] == ENNEMY)
+			else if (infos->heatmap[line][row] == ENNEMY)
 				ft_putchar_fd(ENNEMYCHAR, FD);
-			else if (infos->grid[line][row] == ENNEMYLASTPOS)
+			else if (infos->heatmap[line][row] == ENNEMYLASTPOS)
 				ft_putchar_fd(ENNEMYPOSCHAR, FD);
-			else if (infos->grid[line][row] == NOTHING)
+			else if (infos->heatmap[line][row] == NOTHING)
 				ft_putchar_fd('.', FD);
-			else if (infos->grid[line][row] > 0)
+			else if (infos->heatmap[line][row] > 0)
 			{
-				dprintf(FD, "%d", infos->grid[line][row]); fflush(stdout);
+				dprintf(FD, "%d", infos->heatmap[line][row]);
+				fflush(stdout);
 			}
-			else if (infos->grid[line][row] == ENDOFTAB)
+			else if (infos->heatmap[line][row] == ENDOFTAB)
 				ft_putchar_fd('|', FD);
 			ft_putchar_fd('\t', FD);
 		}

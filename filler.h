@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 19:51:42 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 20:52:33 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void			set_piece_size(t_fill *infos);
 void			grid_parser(t_fill *infos);
 void			piece_parser(t_fill *infos);
 int				place_piece(t_fill *infos, t_coord place, int line, int row);
+int				place_and_decal(t_fill *infos, t_coord pos);
 int				fallback_player(t_fill *infos);
 int				*newarray(int size);
 int				**new_twodim_array(int size);
@@ -65,4 +66,5 @@ int				heatmap_search(t_fill *infos);
 int				heatmap_init(t_fill *infos);
 int				heatmap_fill(t_fill *infos);
 int				is_on_grid(t_fill *infos, int line, int row);
+int				heatmap_grid_search(t_fill *infos, int num);
 #endif

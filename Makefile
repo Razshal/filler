@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/16 17:40:20 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/16 19:54:24 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC = filler.c \
 	  heatmap.c \
 	  fallback_player.c \
 	  grid_functions.c \
-	  debug.c
+	  debug.c \
+	  heatmap_copy_grid.c
 
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror

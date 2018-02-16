@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/15 13:43:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 20:23:44 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,29 @@ int			place_piece(t_fill *infos, t_coord place, int line, int row)
 		res = place_piece(infos, place, ++line, 0);
 	infos->overflow = 0;
 	return (res);
+}
+
+int		place_and_decal(t_fill *infos, t_coord pos)
+{
+	t_coord	tries;
+	t_coord	convert;
+	int		res;
+
+	tries.y = -1;
+	res = 0;
+	while (!res && ++tries.y <= infos->piecesize.y)
+	{
+		tries.x = -1;
+		while (!res && ++tries.x <= infos->piecesize.x)
+		{
+			convert.x = pos.x - tries.x;
+			convert.y = pos.y - tries.y;
+			if ((res = place_piece(infos, convert, 0, 0)))
+			{
+				infos->place = convert;
+				return (1);
+			}
+		}
+	}
+	return (0);
 }
