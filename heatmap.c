@@ -6,25 +6,27 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 12:57:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 19:42:10 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int	ennemy_border(t_fill *infos, t_coord pos)
+static int		test_case(t_fill *infos, int line, int row, int min)
 {
-	if (infos->grid[pos.y][pos.x] != NOTHING)
-		return (1);
-	if (infos->grid[pos.y + 1][pos.x] <= ENNEMY)
+	t_coord pos;
+
+	pos.y = line;
+	pos.x = row;
+	if (is_on_grid(infos, pos.y, pos.x)
+			&& infos->grid[pos.y][pos.x] <= ENNEMY)
 		return (infos->grid[pos.y][pos.x] = 1);
-	if (infos->grid[pos.y - 1][pos.x] <= ENNEMY)
-		return (infos->grid[pos.y][pos.x] = 1);
-	if (infos->grid[pos.y][pos.x + 1] <= ENNEMY)
-		return (infos->grid[pos.y][pos.x] = 1);
-	if (infos->grid[pos.y][pos.x - 1] <= ENNEMY)
-		return (infos->grid[pos.y][pos.x] = 1);
-	return (0);
+	else if (is_on_grid(infos, pos.y, pos.x)
+			&& infos->heatmap[pos.y][pos.x] != NOTHING
+			&& infos->heatmap[pos.y][pos.x] < min
+			&& infos->heatmap[pos.y][pos.x] > 0)
+		return (infos->grid[pos.y][pos.x]);
+	return (min);
 }
 
 static void		heating_grid(t_fill *infos, t_coord pos)
@@ -34,45 +36,38 @@ static void		heating_grid(t_fill *infos, t_coord pos)
 	min = 2147483647;
 	if (infos->grid[pos.y][pos.x] != NOTHING)
 		return ;
-	if (infos->grid[pos.y + 1][pos.x] != NOTHING
-			&& infos->grid[pos.y + 1][pos.x] < min
-			&& infos->grid[pos.y + 1][pos.x] > 0)
-		min = infos->grid[pos.y + 1][pos.x];
-	if (infos->grid[pos.y - 1][pos.x] != NOTHING
-			&& infos->grid[pos.y - 1][pos.x] < min
-			&& infos->grid[pos.y - 1][pos.x] > 0)
-		min = infos->grid[pos.y - 1][pos.x];
-	if (infos->grid[pos.y][pos.x + 1] != NOTHING
-			&& infos->grid[pos.y][pos.x + 1] < min
-			&& infos->grid[pos.y][pos.x + 1] > 0)
-		min = infos->grid[pos.y][pos.x + 1];
-	if (infos->grid[pos.y][pos.x - 1] != NOTHING
-			&& infos->grid[pos.y][pos.x - 1] < min
-			&& infos->grid[pos.y][pos.x - 1] > 0)
-		min = infos->grid[pos.y][pos.x - 1];
+	min = test_case(infos, pos.y + 1, pos.x, min);
+	min = test_case(infos, pos.y - 1, pos.x, min);
+	min = test_case(infos, pos.y, pos.x + 1, min);
+	min = test_case(infos, pos.y, pos.x - 1, min);
 	if (min != 2147483647)
 		infos->grid[pos.y][pos.x] = min + 1;
 }
 
-int			heatmap_init(t_fill *infos)
+int				heatmap_fill(t_fill *infos)
 {
 	t_coord	pos;
 	int		emptycases;
 
 	pos.y = 0;
 	emptycases = 0;
-	while (pos.y++ < infos->gridsize.y)
+	if (!infos->heatmap && !create_array(infos))
+		return (0);
+	while (pos.y < infos->gridsize.y)
 	{
 		pos.x = 0;
-		while (pos.x++ < infos->gridsize.x)
+		while (pos.x < infos->gridsize.x)
 		{
-			if (infos->grid[pos.y][pos.x] == NOTHING)
+			if (infos->heatmap[pos.y][pos.x] == NOTHING)
 				emptycases++;
-			if (!ennemy_border(infos, pos))
-				heating_grid(infos, pos);
+			heating_grid(infos, pos);
+			pos.x++;
 		}
+		pos.y++;
 	}
-	return (emptycases == 0 ? 1 : heatmap_init(infos));
+	if (!emptycases)
+		return (1);
+	return (0);
 }
 
 static t_coord	heatmap_get_best_point(t_fill *infos, int decal)
@@ -82,24 +77,26 @@ static t_coord	heatmap_get_best_point(t_fill *infos, int decal)
 	int		bestvalue;
 
 	bestvalue = 2147483647;
-	pos.x = 0;
-	pos.y = 0;
-	while (pos.y++ < infos->gridsize.y)
+	pos.y = -1;
+	while (++pos.y < infos->gridsize.y)
 	{
+		pos.x = -1;
 		while (pos.x++ < infos->gridsize.x)
 		{
-			if (infos->grid[pos.y][pos.x] > 0
-					&& infos->grid[pos.y][pos.x] < bestvalue && decal-- <= 0)
+			if (is_on_grid(infos, pos.y, pos.x)
+					&& infos->grid[pos.y][pos.x] > 0
+					&& infos->grid[pos.y][pos.x] < bestvalue && decal-- == 0)
 			{
 				final_pos = pos;
 				bestvalue = infos->grid[pos.y][pos.x];
 			}
 		}
 	}
+	dprintf(FD, "y%d x%d bastvalue%d decal %d\n", pos.y, pos.x, bestvalue, decal);
 	return (final_pos);
 }
 
-int		heatmap_search(t_fill *infos)
+int				heatmap_search(t_fill *infos)
 {
 	int		decal;
 	int		res;
@@ -109,14 +106,15 @@ int		heatmap_search(t_fill *infos)
 
 	decal = 0;
 	res = 0;
-	while (!res && decal++ < infos->gridsize.y * infos->gridsize.x)
+	while (!res && decal < infos->gridsize.y * infos->gridsize.x)
 	{
-		tries.y = 0;
-		best_pos = heatmap_get_best_point(infos, decal);
-		while (!res && tries.y++ <= infos->piecesize.y)
+		tries.y = -1;
+		best_pos = heatmap_get_best_point(infos, decal++);
+		dprintf(FD, "decal%d\n", decal);
+		while (!res && ++tries.y <= infos->piecesize.y)
 		{
-			tries.x = 0;
-			while (!res && tries.x++ <= infos->piecesize.x)
+			tries.x = -1;
+			while (!res && ++tries.x <= infos->piecesize.x)
 			{
 				convert.x = best_pos.x - tries.x;
 				convert.y = best_pos.y - tries.y;

@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fallback_player.c                                  :+:      :+:    :+:   */
+/*   heatmap_copy_grid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 14:25:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 15:12:03 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/02/16 19:39:50 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/02/16 19:42:11 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	fallback_player(t_fill *infos)
+int		create_array(t_fill *infos)
 {
-	t_coord	place;
-	int		result;
+	int line;
 
-	place.y = -infos->piecesize.y;
-	result = 0;
-	while (!result && place.y++ < infos->gridsize.y + 5)
-	{
-		place.x = -infos->piecesize.x;
-		while ((result = place_piece(infos, place, 0, 0)) != 1
-				&& place.x < infos->gridsize.x + 5)
-			place.x++;
-	}
-	if (!result)
+	line = 0;
+	if (!(infos->heatmap = new_twodim_array(infos->gridsize.y)))
 		return (0);
-	ft_printf("%d %d\n", place.y, place.x);
+	while (line < infos->gridsize.y)
+	{
+		if (!infos->heatmap[line] &&
+				(!(infos->heatmap[line] = newarray(infos->gridsize.x))))
+			return (0);
+		line++;
+	}
 	return (1);
+}
+
+int		heatmap_init(t_fill *infos)
+{
+	int line;
+	int row;
+
+	line = 0;
+	row = 0;
+	while (line < infos->gridsize.y)
 }

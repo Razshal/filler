@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fallback_player.c                                  :+:      :+:    :+:   */
+/*   grid_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 14:25:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 15:12:03 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/02/16 17:22:25 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/02/16 17:40:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	fallback_player(t_fill *infos)
+int	is_on_grid(t_fill *infos, int line, int row)
 {
-	t_coord	place;
-	int		result;
-
-	place.y = -infos->piecesize.y;
-	result = 0;
-	while (!result && place.y++ < infos->gridsize.y + 5)
-	{
-		place.x = -infos->piecesize.x;
-		while ((result = place_piece(infos, place, 0, 0)) != 1
-				&& place.x < infos->gridsize.x + 5)
-			place.x++;
-	}
-	if (!result)
+	if (line < 0 || row < 0
+			|| line > infos->gridsize.y - 1 || row > infos->gridsize.x - 1)
 		return (0);
-	ft_printf("%d %d\n", place.y, place.x);
 	return (1);
 }
