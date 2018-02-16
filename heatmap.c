@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 20:56:45 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/16 21:10:30 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,17 @@ int				heatmap_fill(t_fill *infos)
 	t_coord	pos;
 	int		emptycases;
 
-	pos.y = 0;
+	pos.y = -1;
 	emptycases = 0;
-	if (!heatmap_init(infos))
-		return (0);
-	while (pos.y < infos->gridsize.y)
+	while (++pos.y < infos->gridsize.y)
 	{
-		pos.x = 0;
-		while (pos.x < infos->gridsize.x)
+		pos.x = -1;
+		while (++pos.x < infos->gridsize.x)
 		{
 			if (infos->heatmap[pos.y][pos.x] == NOTHING)
 				emptycases++;
 			heating_grid(infos, pos);
-			pos.x++;
 		}
-		pos.y++;
 	}
 	if (!emptycases)
 		return (1);
@@ -76,10 +72,8 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 	t_coord	pos;
 
 	pos.y = -1;
-	display_grid(infos);
 	if (!heatmap_grid_search(infos, target))
 		return (0);
-
 	while (++pos.y < infos->gridsize.y)
 	{
 		pos.x = -1;
@@ -98,6 +92,9 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 
 int				heatmap_search(t_fill *infos)
 {
+	while (!heatmap_init(infos))
+		;
 	heatmap_fill(infos);
+	display_grid(infos);
 	return (heatmap_get_best_point(infos, 1));
 }
