@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 16:15:58 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:36:02 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 
 	pos.y = -1;
 	if (!heatmap_grid_search(infos, target))
-		return (1);
+		return (0);
 	while (++pos.y < infos->gridsize.y)
 	{
 		pos.x = -1;
@@ -89,13 +89,12 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 	}
 	if (pos.y >= infos->gridsize.y && pos.x >= infos->gridsize.x)
 		return (heatmap_get_best_point(infos, target + 1));
-	return (0);
+	return (1);
 }
 
 int				heatmap_search(t_fill *infos)
 {
 	heatmap_init(infos);
 	heatmap_fill(infos);
-	display_grid(infos);
 	return (heatmap_get_best_point(infos, 1));
 }

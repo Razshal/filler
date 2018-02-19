@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 21:03:08 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:22:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ int	main(void)
 	{
 		grid_parser(infos);
 		piece_parser(infos);
-		if (!(res = heatmap_search(infos)))
-			ft_putendl("0 0");
-		else
-			dprintf(FD, "heatmap succes");
+		res = heatmap_search(infos);
 	}
+	ft_putendl("0 0");
 	structdel(infos);
 }
