@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 19:24:55 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 17:35:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ void		set_piece_size(t_fill *infos)
 	infos->piecesize.x = ft_atoi(&temp[count]);
 }
 
-void		grid_parser(t_fill *infos)
+int			grid_parser(t_fill *infos)
 {
 	int		line;
 
 	line = 0;
 	if (infos->gridsize.y == -1)
 		set_grid_size(infos);
-	if (!(infos->grid = init_first_dim(infos->gridsize.y + 1)))
-		return ;
+	if (!infos->grid &&
+			!(infos->grid = init_first_dim(infos->gridsize.y + 1)))
+		return (0);
 	while (line < infos->gridsize.y)
 	{
 		if (!infos->grid[line])
@@ -78,9 +79,10 @@ void		grid_parser(t_fill *infos)
 			ft_strcpy(infos->grid[line++], &infos->currentline[4]);
 		get_next_line(0, &infos->currentline);
 	}
+	return (1);
 }
 
-void		piece_parser(t_fill *infos)
+int			piece_parser(t_fill *infos)
 {
 	int		line;
 
@@ -91,7 +93,7 @@ void		piece_parser(t_fill *infos)
 	ft_memdel((void**)infos->currentpiece);
 	line = 0;
 	if (!(infos->currentpiece = init_first_dim(infos->piecesize.y + 1)))
-		return ;
+		return (0);
 	while (infos->piecesize.y > line)
 	{
 		get_next_line(0, &infos->currentline);
@@ -100,4 +102,5 @@ void		piece_parser(t_fill *infos)
 		line++;
 	}
 	infos->currentpiece[line] = 0;
+	return (1);
 }
