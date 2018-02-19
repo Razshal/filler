@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 17:35:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 18:37:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void		set_grid_size(t_fill *infos)
 
 	count = 0;
 	while (!ft_strstr(infos->currentline, "Plateau"))
+	{
+		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
+	}
 	temp = &ft_strstr(infos->currentline, "Plateau")[7];
 	infos->gridsize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
@@ -49,7 +52,10 @@ void		set_piece_size(t_fill *infos)
 
 	count = 0;
 	while (!ft_strstr(infos->currentline, "Piece"))
+	{
+		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
+	}
 	temp = &ft_strstr(infos->currentline, "Piece")[6];
 	infos->piecesize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
@@ -77,8 +83,10 @@ int			grid_parser(t_fill *infos)
 			infos->grid[line] = ft_strnew(infos->gridsize.x + 1);
 		if (infos->grid[line] && ft_isdigit(*infos->currentline))
 			ft_strcpy(infos->grid[line++], &infos->currentline[4]);
+		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 	}
+	infos->grid[line] = NULL;
 	return (1);
 }
 
@@ -86,16 +94,17 @@ int			piece_parser(t_fill *infos)
 {
 	int		line;
 
-	line = 0;
+	line = -1;
 	set_piece_size(infos);
-	while (infos->currentpiece && infos->currentpiece[line++])
-		ft_memdel((void*)&infos->currentpiece[line]);
+	while (infos->currentpiece && infos->currentpiece[++line])
+		ft_memdel((void**)&infos->currentpiece[line]);
 	ft_memdel((void**)infos->currentpiece);
 	line = 0;
 	if (!(infos->currentpiece = init_first_dim(infos->piecesize.y + 1)))
 		return (0);
 	while (infos->piecesize.y > line)
 	{
+		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 		infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
 		ft_strcpy(infos->currentpiece[line], infos->currentline);

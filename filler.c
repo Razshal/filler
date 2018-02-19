@@ -6,39 +6,12 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 17:11:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 18:40:11 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-/*
-static void display_grid(t_fill *infos)
-{
-	int line = -1;
-	int row;
 
-	int i = 0;
-
-	while (++line < infos->gridsize.y)
-	{
-		dprintf(FD, "LOOP %d\n", i++);
-		row = -1;
-		while (++row < infos->gridsize.x)
-		{
-			if (infos->grid[line][row] == PLAYER)
-				ft_putchar_fd(infos->player, FD);
-			if (infos->grid[line][row] == ENNEMY)
-				ft_putchar_fd(ENNEMYCHAR, FD);
-			if (infos->grid[line][row] == ENNEMYLASTPOS)
-				ft_putchar_fd(ENNEMYPOSCHAR, FD);
-			if (infos->grid[line][row] == NOTHING)
-				ft_putchar_fd('.', FD);
-			if (infos->grid[line][row] == ENDOFTAB)
-				ft_putchar_fd('|', FD);
-		}
-	}
-}
-*/
 int	main(void)
 {
 	t_fill	*infos;

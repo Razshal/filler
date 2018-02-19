@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 17:26:06 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 18:24:39 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 
 int				heatmap_search(t_fill *infos, int is_first_turn)
 {
-	if (!is_first_turn && !grid_search(infos, ENNEMYPOSCHAR))
+/*	if (!is_first_turn && !grid_search(infos, ENNEMYPOSCHAR))
 	{
 		dprintf(FD, "red is dead\n");
 		return (fallback_player(infos));
-	}
+	}*/
 	is_first_turn = is_first_turn ? 1 : 0;
 	heatmap_init(infos);
 	heatmap_fill(infos);
