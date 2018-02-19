@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 14:54:07 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:15:58 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static int		test_case(t_fill *infos, int line, int row, int min)
 
 	pos.y = line;
 	pos.x = row;
+	if (!is_on_grid(infos, pos.y, pos.x))
+		return (min);
 	if (is_on_grid(infos, pos.y, pos.x)
 			&& infos->heatmap[pos.y][pos.x] <= ENNEMY)
-		return (infos->heatmap[pos.y][pos.x] = 1);
+		return (0);
 	else if (is_on_grid(infos, pos.y, pos.x)
 			&& infos->heatmap[pos.y][pos.x] != NOTHING
 			&& infos->heatmap[pos.y][pos.x] < min
@@ -34,23 +36,19 @@ static int		heating_grid(t_fill *infos, t_coord pos)
 	int min;
 
 	min = 2147483647;
-	if (!is_on_grid(infos, pos.x, pos.y)
-			|| infos->heatmap[pos.y][pos.x] != NOTHING
-			|| infos->heatmap[pos.y][pos.x] != PLAYER)
-		return (0);
+	if (infos->heatmap[pos.y][pos.x] != NOTHING
+		&& infos->heatmap[pos.y][pos.x] != PLAYER)
+		return (infos->heatmap[pos.y][pos.x]);
 	min = test_case(infos, pos.y + 1, pos.x, min);
 	min = test_case(infos, pos.y - 1, pos.x, min);
 	min = test_case(infos, pos.y, pos.x + 1, min);
 	min = test_case(infos, pos.y, pos.x - 1, min);
-	if (min != 2147483647)
-	{
-		infos->heatmap[pos.y][pos.x] = min + 1;
-		return (1);
-	}
-	return (0);
+	if (min != 2147483647 && min >= 0)
+		return (min + 1);
+	return (infos->heatmap[pos.y][pos.x]);
 }
 
-int				heatmap_fill(t_fill *infos)
+void			heatmap_fill(t_fill *infos)
 {
 	t_coord	pos;
 	int		emptycases;
@@ -61,17 +59,20 @@ int				heatmap_fill(t_fill *infos)
 	{
 		pos.x = -1;
 		while (++pos.x < infos->gridsize.x)
-			emptycases += heating_grid(infos, pos);
+		{
+			if (infos->heatmap[pos.y][pos.x] == NOTHING)
+				emptycases++;
+			infos->heatmap[pos.y][pos.x] = heating_grid(infos, pos);
+		}
 	}
 	if (emptycases)
-		return (heatmap_fill(infos));
-	return (1);
+		heatmap_fill(infos);
 }
 
 static int	heatmap_get_best_point(t_fill *infos, int target)
 {
 	t_coord	pos;
-	display_grid(infos);
+
 	pos.y = -1;
 	if (!heatmap_grid_search(infos, target))
 		return (1);

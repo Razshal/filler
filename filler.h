@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 14:14:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:38:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int				**new_twodim_array(int size);
 char			**init_piece(int size);
 int				heatmap_search(t_fill *infos);
 int				heatmap_init(t_fill *infos);
-int				heatmap_fill(t_fill *infos);
 int				is_on_grid(t_fill *infos, int line, int row);
 int				heatmap_grid_search(t_fill *infos, int num);
 #endif
