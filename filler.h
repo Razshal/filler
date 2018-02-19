@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 20:52:33 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 14:14:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef	struct	s_fill
 ///////////////////-DEBUG-////////////////////////
 #include <stdio.h>
 #include <fcntl.h>
-#define FD open("/dev/ttys006", O_RDWR)
+#define FD open("/dev/ttys008", O_RDWR)
 void display_grid(t_fill *infos);
 //////////////////////////////////////////////////
 

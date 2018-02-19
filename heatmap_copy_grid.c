@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:39:50 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 20:53:14 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 14:27:40 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		create_array(t_fill *infos)
+static int	create_array(t_fill *infos)
 {
 	int line;
 
@@ -29,7 +29,7 @@ int		create_array(t_fill *infos)
 	return (1);
 }
 
-int		heatmap_init(t_fill *infos)
+int			heatmap_init(t_fill *infos)
 {
 	int line;
 	int row;

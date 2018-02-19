@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 21:10:30 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/19 14:54:07 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,25 @@ static int		test_case(t_fill *infos, int line, int row, int min)
 	return (min);
 }
 
-static void		heating_grid(t_fill *infos, t_coord pos)
+static int		heating_grid(t_fill *infos, t_coord pos)
 {
 	int min;
 
 	min = 2147483647;
-	if (infos->heatmap[pos.y][pos.x] != NOTHING
+	if (!is_on_grid(infos, pos.x, pos.y)
+			|| infos->heatmap[pos.y][pos.x] != NOTHING
 			|| infos->heatmap[pos.y][pos.x] != PLAYER)
-		return ;
+		return (0);
 	min = test_case(infos, pos.y + 1, pos.x, min);
 	min = test_case(infos, pos.y - 1, pos.x, min);
 	min = test_case(infos, pos.y, pos.x + 1, min);
 	min = test_case(infos, pos.y, pos.x - 1, min);
 	if (min != 2147483647)
+	{
 		infos->heatmap[pos.y][pos.x] = min + 1;
+		return (1);
+	}
+	return (0);
 }
 
 int				heatmap_fill(t_fill *infos)
@@ -56,28 +61,24 @@ int				heatmap_fill(t_fill *infos)
 	{
 		pos.x = -1;
 		while (++pos.x < infos->gridsize.x)
-		{
-			if (infos->heatmap[pos.y][pos.x] == NOTHING)
-				emptycases++;
-			heating_grid(infos, pos);
-		}
+			emptycases += heating_grid(infos, pos);
 	}
-	if (!emptycases)
-		return (1);
-	return (0);
+	if (emptycases)
+		return (heatmap_fill(infos));
+	return (1);
 }
 
 static int	heatmap_get_best_point(t_fill *infos, int target)
 {
 	t_coord	pos;
-
+	display_grid(infos);
 	pos.y = -1;
 	if (!heatmap_grid_search(infos, target))
-		return (0);
+		return (1);
 	while (++pos.y < infos->gridsize.y)
 	{
 		pos.x = -1;
-		while (pos.x++ < infos->gridsize.x)
+		while (++pos.x < infos->gridsize.x)
 		{
 			if (infos->heatmap[pos.y][pos.x] == target
 					&& place_and_decal(infos, pos))
@@ -92,8 +93,7 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 
 int				heatmap_search(t_fill *infos)
 {
-	while (!heatmap_init(infos))
-		;
+	heatmap_init(infos);
 	heatmap_fill(infos);
 	display_grid(infos);
 	return (heatmap_get_best_point(infos, 1));
