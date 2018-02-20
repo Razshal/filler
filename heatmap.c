@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 11:56:30 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 12:45:59 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			heatmap_fill(t_fill *infos)
 		heatmap_fill(infos);
 }
 
-static int	heatmap_get_best_point(t_fill *infos, int target)
+static int	heatmap_get_best_point_o(t_fill *infos, int target)
 {
 	t_coord	pos;
 
@@ -87,9 +87,30 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 							infos->place.y, infos->place.x));
 		}
 	}
-	if (pos.y >= infos->gridsize.y && pos.x >= infos->gridsize.x)
-		return (heatmap_get_best_point(infos, target + 1));
-	return (1);
+	return (heatmap_get_best_point_o(infos, target + 1));
+}
+
+static int	heatmap_get_best_point_x(t_fill *infos, int target)
+{
+	t_coord	pos;
+
+	pos.y = infos->gridsize.y - 1;
+	if (!heatmap_grid_search(infos, target) && target > 1)
+		return (0);
+	while (pos.y >= 0)
+	{
+		pos.x = infos->gridsize.x - 1;
+		while (pos.x >= 0)
+		{
+			if (infos->heatmap[pos.y][pos.x] == target
+					&& place_and_decal(infos, pos))
+				return (ft_printf("%d %d\n",
+							infos->place.y, infos->place.x));
+			pos.x--;
+		}
+		pos.y--;
+	}
+	return (heatmap_get_best_point_x(infos, target + 1));
 }
 
 int				heatmap_search(t_fill *infos)
@@ -97,5 +118,9 @@ int				heatmap_search(t_fill *infos)
 	if (!heatmap_init(infos))
 		return (0);
 	heatmap_fill(infos);
-	return (heatmap_get_best_point(infos, 1));
+	if (infos->player == 'X')
+		return (heatmap_get_best_point_x(infos, 1));
+	else
+		return (heatmap_get_best_point_o(infos, 1));
+
 }
