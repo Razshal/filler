@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 11:58:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 11:45:21 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:19:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main(void)
 		res = heatmap_search(infos);
 		if (!res)
 			res = fallback_player(infos);
+		if (!res)
+			structdel(infos);
 	}
 	ft_putendl("0 0");
-	structdel(infos);
+//	structdel(infos);
 }

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:20:07 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 18:34:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:14:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,17 @@ void	structdel(t_fill *struc)
 
 	line = 0;
 	ft_memdel((void**)&struc->currentline);
-	while (line < struc->gridsize.y && struc->grid[line])
+	while (struc->grid[line])
 		ft_memdel((void**)&struc->grid[line++]);
+	ft_memdel((void**)&struc->grid[line]);
 	ft_memdel((void**)&struc->grid);
-	line = -1;
-//	while (struc->heatmap[++line])
-//		ft_memdel((void**)&struc->heatmap[line]);
+	line = 0;
+	while (line < struc->gridsize.y)
+		ft_memdel((void**)&struc->heatmap[line++]);
 	ft_memdel((void**)&struc->heatmap);
-	line = -1;
-//	while (struc->currentpiece[++line])
-//		ft_memdel((void**)&struc->currentpiece[line]);
+	line = 0;
+	while (struc->currentpiece[line])
+		ft_memdel((void**)&struc->currentpiece[line++]);
 	ft_memdel((void**)&struc->currentpiece);
 	ft_memdel((void**)&struc);
 }

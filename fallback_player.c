@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 14:25:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 10:39:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 15:13:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	fallback_player(t_fill *infos)
 	t_coord	place;
 	int		result;
 
-	dprintf(FD, "Red is dead\n");
 	place.y = -infos->piecesize.y;
 	result = 0;
 	while (!result && place.y++ < infos->gridsize.y + 5)

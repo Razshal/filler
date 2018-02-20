@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 16:43:47 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 15:27:42 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 15:13:26 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void display_grid(t_fill *infos)
 
 	while (++line < infos->gridsize.y)
 	{
-//		dprintf(FD, "LOOP %d\n", i++);
 		row = -1;
 		while (++row < infos->gridsize.x)
 		{

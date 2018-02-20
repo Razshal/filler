@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 11:43:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:20:15 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int			grid_parser(t_fill *infos)
 	int		line;
 
 	line = 0;
+
 	if (infos->gridsize.y == -1)
 		set_grid_size(infos);
 	if (!infos->grid &&
@@ -98,7 +99,7 @@ int			piece_parser(t_fill *infos)
 	set_piece_size(infos);
 	while (infos->currentpiece && infos->currentpiece[line])
 		ft_memdel((void**)&infos->currentpiece[line++]);
-	ft_memdel((void**)infos->currentpiece);
+	ft_memdel((void**)&infos->currentpiece);
 	line = 0;
 	if (!(infos->currentpiece = init_first_dim(infos->piecesize.y + 1)))
 		return (0);
