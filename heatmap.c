@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 12:45:59 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 13:20:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int		test_case(t_fill *infos, int line, int row, int min)
 	if (infos->heatmap[pos.y][pos.x] == ENNEMYLASTPOS)
 		return (0);
 	if (infos->heatmap[pos.y][pos.x] == ENNEMY)
-		return (4);
+		return (infos->gridsize.y < 20 ? 1 :
+				(infos->gridsize.x + infos->gridsize.y) / 12);
 	else if (infos->heatmap[pos.y][pos.x] != NOTHING
 			&& infos->heatmap[pos.y][pos.x] < min
 			&& infos->heatmap[pos.y][pos.x] > 0)
@@ -118,7 +119,7 @@ int				heatmap_search(t_fill *infos)
 	if (!heatmap_init(infos))
 		return (0);
 	heatmap_fill(infos);
-	if (infos->player == 'X')
+	if (infos->player == 'X' && infos->gridsize.y > 20)
 		return (heatmap_get_best_point_x(infos, 1));
 	else
 		return (heatmap_get_best_point_o(infos, 1));
