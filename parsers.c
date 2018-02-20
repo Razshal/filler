@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 18:37:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:43:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ int			grid_parser(t_fill *infos)
 		if (!infos->grid[line])
 			infos->grid[line] = ft_strnew(infos->gridsize.x + 1);
 		if (infos->grid[line] && ft_isdigit(*infos->currentline))
-			ft_strcpy(infos->grid[line++], &infos->currentline[4]);
+			fill_array_lines(infos,
+					infos->grid[line++], &infos->currentline[4]);
 		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 	}
-	infos->grid[line] = NULL;
 	return (1);
 }
 
@@ -94,10 +94,10 @@ int			piece_parser(t_fill *infos)
 {
 	int		line;
 
-	line = -1;
+	line = 0;
 	set_piece_size(infos);
-	while (infos->currentpiece && infos->currentpiece[++line])
-		ft_memdel((void**)&infos->currentpiece[line]);
+	while (infos->currentpiece && infos->currentpiece[line])
+		ft_memdel((void**)&infos->currentpiece[line++]);
 	ft_memdel((void**)infos->currentpiece);
 	line = 0;
 	if (!(infos->currentpiece = init_first_dim(infos->piecesize.y + 1)))
@@ -107,8 +107,7 @@ int			piece_parser(t_fill *infos)
 		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 		infos->currentpiece[line] = ft_strnew(infos->piecesize.x + 1);
-		ft_strcpy(infos->currentpiece[line], infos->currentline);
-		line++;
+		ft_strcpy(infos->currentpiece[line++], infos->currentline);
 	}
 	infos->currentpiece[line] = 0;
 	return (1);

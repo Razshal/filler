@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 19:39:50 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 14:27:40 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 10:58:15 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ static int	create_array(t_fill *infos)
 	int line;
 
 	line = 0;
-	if (!(infos->heatmap = new_twodim_array(infos->gridsize.y)))
+	if (!infos->heatmap &&
+			!(infos->heatmap = new_twodim_array(infos->gridsize.y)))
 		return (0);
 	while (line < infos->gridsize.y)
 	{
 		if (!infos->heatmap[line] &&
-				(!(infos->heatmap[line] = newarray(infos->gridsize.x))))
+				 !(infos->heatmap[line] = newarray(infos->gridsize.x)))
 			return (0);
 		line++;
 	}
@@ -44,11 +45,9 @@ int			heatmap_init(t_fill *infos)
 		{
 			if (infos->grid[line][row] == GRIDNOTHING)
 				infos->heatmap[line][row] = NOTHING;
-			if (infos->grid[line][row] == PLAYERCHAR)
-				infos->heatmap[line][row] = PLAYER;
-			if (infos->grid[line][row] == ENNEMYCHAR)
+			else if (infos->grid[line][row] == ENNEMYCHAR)
 				infos->heatmap[line][row] = ENNEMY;
-			if (infos->grid[line][row] == ENNEMYPOSCHAR)
+			else if (infos->grid[line][row] == ENNEMYPOSCHAR)
 				infos->heatmap[line][row] = ENNEMYLASTPOS;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 17:33:44 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:43:01 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ENNEMYLASTPOS -4
 # define PLAYERCHAR (infos->player)
 # define ENNEMYCHAR (infos->player == 'X' ? 'O' : 'X')
-# define ENNEMYPOSCHAR (infos->player == 'X' ? 'o' : 'x')
+# define ENNEMYPOSCHAR (ENNEMYCHAR + 32)
 # define ISPLACABLE(something) (something == NOTHING || something > 0 ? 1 : 0)
 
 typedef struct	s_coord
@@ -46,7 +46,7 @@ typedef	struct	s_fill
 ///////////////////-DEBUG-////////////////////////
 #include <stdio.h>
 #include <fcntl.h>
-#define FD open("/dev/ttys006", O_RDWR)
+#define FD open("/dev/ttys001", O_RDWR)
 void display_grid(t_fill *infos);
 ////////////////////////////////////////////////////
 
@@ -62,9 +62,10 @@ int				fallback_player(t_fill *infos);
 int				*newarray(int size);
 int				**new_twodim_array(int size);
 char			**init_piece(int size);
-int				heatmap_search(t_fill *infos, int is_first_turn);
+int				heatmap_search(t_fill *infos);
 int				heatmap_init(t_fill *infos);
 int				is_on_grid(t_fill *infos, int line, int row);
 int				heatmap_grid_search(t_fill *infos, int num);
 int				grid_search(t_fill *infos, char c);
+char			*fill_array_lines(t_fill *infos, char *dst, const char *src);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:38:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/19 18:24:39 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:56:30 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static int		test_case(t_fill *infos, int line, int row, int min)
 	pos.x = row;
 	if (!is_on_grid(infos, pos.y, pos.x))
 		return (min);
-	if (is_on_grid(infos, pos.y, pos.x)
-			&& infos->heatmap[pos.y][pos.x] <= ENNEMY)
+	if (infos->heatmap[pos.y][pos.x] == ENNEMYLASTPOS)
 		return (0);
-	else if (is_on_grid(infos, pos.y, pos.x)
-			&& infos->heatmap[pos.y][pos.x] != NOTHING
+	if (infos->heatmap[pos.y][pos.x] == ENNEMY)
+		return (4);
+	else if (infos->heatmap[pos.y][pos.x] != NOTHING
 			&& infos->heatmap[pos.y][pos.x] < min
 			&& infos->heatmap[pos.y][pos.x] > 0)
 		return (infos->heatmap[pos.y][pos.x]);
@@ -74,7 +74,7 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 	t_coord	pos;
 
 	pos.y = -1;
-	if (!heatmap_grid_search(infos, target))
+	if (!heatmap_grid_search(infos, target) && target > 1)
 		return (0);
 	while (++pos.y < infos->gridsize.y)
 	{
@@ -92,15 +92,10 @@ static int	heatmap_get_best_point(t_fill *infos, int target)
 	return (1);
 }
 
-int				heatmap_search(t_fill *infos, int is_first_turn)
+int				heatmap_search(t_fill *infos)
 {
-/*	if (!is_first_turn && !grid_search(infos, ENNEMYPOSCHAR))
-	{
-		dprintf(FD, "red is dead\n");
-		return (fallback_player(infos));
-	}*/
-	is_first_turn = is_first_turn ? 1 : 0;
-	heatmap_init(infos);
+	if (!heatmap_init(infos))
+		return (0);
 	heatmap_fill(infos);
 	return (heatmap_get_best_point(infos, 1));
 }

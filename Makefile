@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/19 17:23:33 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/20 11:44:25 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = filler.c \
 	  fallback_player.c \
 	  grid_functions.c \
 	  heatmap_copy_grid.c \
+	  fill_array_lines.c \
 	  debug.c
 
 OBJ = $(SRC:.c=.o)

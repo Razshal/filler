@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fallback_player.c                                  :+:      :+:    :+:   */
+/*   fill_array_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 14:25:10 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 10:39:47 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/02/20 11:43:44 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/02/20 11:43:45 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	fallback_player(t_fill *infos)
+char	*fill_array_lines(t_fill *infos, char *dst, const char *src)
 {
-	t_coord	place;
-	int		result;
+	int count;
 
-	dprintf(FD, "Red is dead\n");
-	place.y = -infos->piecesize.y;
-	result = 0;
-	while (!result && place.y++ < infos->gridsize.y + 5)
+	count = 0;
+	while (src[count] != '\0')
 	{
-		place.x = -infos->piecesize.x;
-		while ((result = place_piece(infos, place, 0, 0)) != 1
-				&& place.x < infos->gridsize.x + 5)
-			place.x++;
+		if (dst[count] == '.' && src[count] == ENNEMYCHAR)
+			dst[count] = ENNEMYPOSCHAR;
+		else
+			dst[count] = src[count];
+		count++;
 	}
-	if (!result)
-		return (0);
-	ft_printf("%d %d\n", place.y, place.x);
-	return (1);
+	dst[count] = '\0';
+	return (dst);
 }
