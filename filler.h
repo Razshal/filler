@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 16:52:09 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:58:43 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,6 @@ typedef	struct	s_fill
 	int		**heatmap;
 }				t_fill;
 
-///////////////////-DEBUG-////////////////////////
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#define FD open("/dev/ttys001", O_RDWR)
-void display_grid(t_fill *infos);
-////////////////////////////////////////////////////
-
 t_fill			*structnew(char player);
 void			structdel(t_fill *struc);
 void			set_grid_size(t_fill *infos);
@@ -62,9 +54,9 @@ int				place_and_decal(t_fill *infos, t_coord pos);
 int				fallback_player(t_fill *infos);
 int				*newarray(int size);
 int				**new_twodim_array(int size);
-char			**init_piece(int size);
 int				heatmap_search(t_fill *infos);
 int				heatmap_init(t_fill *infos);
+void			heatmap_fill(t_fill *infos);
 int				is_on_grid(t_fill *infos, int line, int row);
 int				heatmap_grid_search(t_fill *infos, int num);
 int				grid_search(t_fill *infos, char c);

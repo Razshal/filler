@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/20 11:44:25 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/20 17:51:11 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ SRC = filler.c \
 	  fallback_player.c \
 	  grid_functions.c \
 	  heatmap_copy_grid.c \
-	  fill_array_lines.c \
-	  debug.c
+	  heatmap_fill.c
 
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
@@ -31,7 +30,9 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) #-fsanitize=address -g3
+	@echo "compiling project"
+	@gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) #-fsanitize=address -g3
+	@echo "project compiled"
 
 $(LIBFT):
 	make -C $(LIBDIR)

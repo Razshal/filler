@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 17:20:15 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:29:41 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int			grid_parser(t_fill *infos)
 	int		line;
 
 	line = 0;
-
 	if (infos->gridsize.y == -1)
 		set_grid_size(infos);
 	if (!infos->grid &&

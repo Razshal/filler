@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:18:15 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/16 20:23:44 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:30:01 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			place_piece(t_fill *infos, t_coord place, int line, int row)
 	return (res);
 }
 
-int		place_and_decal(t_fill *infos, t_coord pos)
+int			place_and_decal(t_fill *infos, t_coord pos)
 {
 	t_coord	tries;
 	t_coord	convert;

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:20:07 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 17:14:18 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:49:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,6 @@ int		**new_twodim_array(int size)
 	return (array);
 }
 
-char	**init_piece(int size)
-{
-	char **new;
-
-	if (!(new = (char**)malloc(sizeof(char*) * size)))
-		return (NULL);
-	while (size)
-		new[--size] = NULL;
-	return (new);
-}
-
 void	structdel(t_fill *struc)
 {
 	int line;
@@ -74,7 +63,6 @@ void	structdel(t_fill *struc)
 	ft_memdel((void**)&struc->currentline);
 	while (struc->grid[line])
 		ft_memdel((void**)&struc->grid[line++]);
-	ft_memdel((void**)&struc->grid[line]);
 	ft_memdel((void**)&struc->grid);
 	line = 0;
 	while (line < struc->gridsize.y)
