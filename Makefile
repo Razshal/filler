@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/02/20 17:51:11 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/02/21 15:42:30 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@echo "compiling project"
-	@gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) #-fsanitize=address -g3
+	@gcc $(FLAGS) -o $(NAME) $(LIBFT) $(OBJ)
 	@echo "project compiled"
 
 $(LIBFT):
