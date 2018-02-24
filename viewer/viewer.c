@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 18:12:51 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 18:27:24 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static void	print_result(int score_o, int score_x)
 {
 	print_newlines(5);
 	if (score_o > score_x)
-		ft_printf("\e[41mVictory for Player O\n%d vs {EOC}\e[44m%d{EOC}\n",
+		ft_printf("\e[41mVictory for Player O | %d vs {EOC}\e[44m%d{EOC}\n",
 				score_o, score_x);
 	if (score_x > score_o)
-		ft_printf("\e[44mVictory for Player X\n%d vs {EOC}\e[41m%d{EOC}\n",
+		ft_printf("\e[44mVictory for Player X | %d{EOC} vs \e[41m%d{EOC}\n",
 				score_x, score_o);
 	if (score_o == score_x)
 		ft_printf("\e[44mMATCH NULL{EOC}\n");
