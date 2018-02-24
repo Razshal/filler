@@ -6,14 +6,14 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 15:43:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:45:19 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include <unistd.h>
 
-static void print_players(char *line)
+static void	print_players(char *line)
 {
 	int count;
 
@@ -35,7 +35,7 @@ static void print_players(char *line)
 	ft_putchar('\n');
 }
 
-static void print_newlines(int howmany)
+static void	print_newlines(int howmany)
 {
 	int count;
 
@@ -44,13 +44,13 @@ static void print_newlines(int howmany)
 		ft_putchar('\n');
 }
 
-static void print_score(int score_o, int score_x)
+static void	print_score(int score_o, int score_x)
 {
 	ft_printf("\e[41mJoueur O : %d{EOC}\n\e[44mJoueur X : %d{EOC}\n\n",
 			score_o, score_x);
 }
 
-int main (int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		pieces_x;
 	int		pieces_o;
