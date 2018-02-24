@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 15:45:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 16:48:14 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@ int			main(int argc, char **argv)
 {
 	int		pieces_x;
 	int		pieces_o;
+	int		done;
 	char	*line;
 
 	pieces_x = 0;
 	pieces_o = 0;
+	done = 0;
 	while (get_next_line(0, &line))
 	{
 		if (ft_strstr(line, "Plateau"))
@@ -69,7 +71,9 @@ int			main(int argc, char **argv)
 		if (ft_isdigit(line[0]))
 			print_players(line);
 		pieces_o += !(!ft_strstr(line, "<got (O)"));
+		pieces_o -= pieces_o < pieces_x && !done++;
 		pieces_x += !(!ft_strstr(line, "<got (X)"));
+		pieces_x -= pieces_x < pieces_o && !done++;
 		ft_memdel((void**)&line);
 	}
 }
