@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 15:24:59 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:43:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void print_players(char *line)
 	while (line[count])
 	{
 		if (line[count] == 'O')
-			ft_printf("{RED}%c{EOC}", line[count]);
+			ft_printf("\e[41m  {EOC}");
 		else if (line[count] == 'o')
-			ft_printf("{YELLOW}%c{EOC}", line[count]);
+			ft_printf("\e[43m  {EOC}");
 		else if (line[count] == 'X')
-			ft_printf("{BLUE}%c{EOC}", line[count]);
+			ft_printf("\e[44m  {EOC}");
 		else if (line[count] == 'x')
-			ft_printf("{CYAN}%c{EOC}", line[count]);
+			ft_printf("\e[46m  {EOC}");
 		else if (line[count] == '.')
-			ft_putchar(line[count]);
+			ft_printf("%C ", L'▢');
 		count++;
 	}
 	ft_putchar('\n');
@@ -46,7 +46,7 @@ static void print_newlines(int howmany)
 
 static void print_score(int score_o, int score_x)
 {
-	ft_printf("{RED}Joueur O : %d{EOC}\n{BLUE}Joueur X : %d{EOC}\n\n",
+	ft_printf("\e[41mJoueur O : %d{EOC}\n\e[44mJoueur X : %d{EOC}\n\n",
 			score_o, score_x);
 }
 
