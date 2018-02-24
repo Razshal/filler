@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 17:53:08 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 18:12:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ static void	print_result(int score_o, int score_x)
 {
 	print_newlines(5);
 	if (score_o > score_x)
-		ft_printf("\e[41mVictory for O Player\n%d vs {EOC}\e[44m%d{EOC}\n", score_o, score_x);
+		ft_printf("\e[41mVictory for Player O\n%d vs {EOC}\e[44m%d{EOC}\n",
+				score_o, score_x);
 	if (score_x > score_o)
-		ft_printf("\e[44mVictory for X Player\n%d vs {EOC}\e[41m%d{EOC}\n",
+		ft_printf("\e[44mVictory for Player X\n%d vs {EOC}\e[41m%d{EOC}\n",
 				score_x, score_o);
 	if (score_o == score_x)
 		ft_printf("\e[44mMATCH NULL{EOC}\n");
@@ -72,7 +73,6 @@ int			main(int argc, char **argv)
 	int		pieces_x;
 	int		pieces_o;
 	char	*line;
-	int		done;
 	int		ret;
 
 	pieces_x = 0;
@@ -81,8 +81,11 @@ int			main(int argc, char **argv)
 	{
 		if (ft_strstr(line, "Plateau"))
 		{
-			done = 0;
-			usleep(argc > 1 ? ft_atoi(argv[1]) : 50000);
+			if ((ft_strstr(argv[1], "-q")
+					|| (argc > 2 && ft_strstr(argv[2], "-q")))
+					&& (pieces_x + 10 < pieces_o || pieces_o + 10 < pieces_x))
+				break ;
+			usleep(argc > 1 && ft_atoi(argv[1]) > 0 ? ft_atoi(argv[1]) : 50000);
 			print_newlines(150);
 			print_score((pieces_o += (ret == 2)), (pieces_x += (ret == 3)));
 		}
@@ -90,5 +93,6 @@ int			main(int argc, char **argv)
 			ret = print_players(line, ret);
 		ft_memdel((void**)&line);
 	}
+	ft_memdel((void**)&line);
 	print_result(pieces_o, pieces_x);
 }
