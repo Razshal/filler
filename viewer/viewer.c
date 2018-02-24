@@ -6,11 +6,11 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 13:29:49 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/02/24 15:24:59 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "../libft/includes/libft.h"
 #include <unistd.h>
 
 static void print_players(char *line)
@@ -35,18 +35,18 @@ static void print_players(char *line)
 	ft_putchar('\n');
 }
 
-static void print_spaces(void)
+static void print_newlines(int howmany)
 {
 	int count;
 
 	count = 0;
-	while (count++ < 150)
+	while (count++ < howmany)
 		ft_putchar('\n');
 }
 
-static void print_score(int score_x, int score_o)
+static void print_score(int score_o, int score_x)
 {
-	ft_printf("{RED}Joueur O : %d{EOC}\n{BLUE}Joueur X : %d{EOC}\n",
+	ft_printf("{RED}Joueur O : %d{EOC}\n{BLUE}Joueur X : %d{EOC}\n\n",
 			score_o, score_x);
 }
 
@@ -62,13 +62,14 @@ int main (int argc, char **argv)
 	{
 		if (ft_strstr(line, "Plateau"))
 		{
-			usleep(argc > 1 ? ft_atoi(argv[1]) : 5000);
-			print_spaces();
-			print_score(pieces_x, pieces_o);
+			usleep(argc > 1 ? ft_atoi(argv[1]) : 50000);
+			print_newlines(150);
+			print_score(pieces_o, pieces_x);
 		}
 		if (ft_isdigit(line[0]))
 			print_players(line);
-		pieces_x = ft_strchr(line, 'x') ? pieces_x + 1 : pieces_x;
-		pieces_o = ft_strchr(line, 'o') ? pieces_o + 1 : pieces_o;
+		pieces_o += !(!ft_strstr(line, "<got (O)"));
+		pieces_x += !(!ft_strstr(line, "<got (X)"));
+		ft_memdel((void**)&line);
 	}
 }
