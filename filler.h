@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 12:50:49 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 17:58:43 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/01 12:41:33 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef	struct	s_fill
 
 t_fill			*structnew(char player);
 void			structdel(t_fill *struc);
-void			set_grid_size(t_fill *infos);
-void			set_piece_size(t_fill *infos);
 int				grid_parser(t_fill *infos);
 int				piece_parser(t_fill *infos);
 int				place_piece(t_fill *infos, t_coord place, int line, int row);

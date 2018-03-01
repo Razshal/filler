@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 16:31:46 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/20 17:29:41 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/01 13:10:56 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	**init_first_dim(int size)
 	return (new);
 }
 
-void		set_grid_size(t_fill *infos)
+static int	set_grid_size(t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -34,6 +34,8 @@ void		set_grid_size(t_fill *infos)
 		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 	}
+	if (!ft_strstr(infos->currentline, "Plateau"))
+		return (0);
 	temp = &ft_strstr(infos->currentline, "Plateau")[7];
 	infos->gridsize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
@@ -43,9 +45,10 @@ void		set_grid_size(t_fill *infos)
 	while (ft_ispace(temp[count]))
 		count++;
 	infos->gridsize.x = ft_atoi(&temp[count]);
+	return (1);
 }
 
-void		set_piece_size(t_fill *infos)
+static int	set_piece_size(t_fill *infos)
 {
 	char	*temp;
 	int		count;
@@ -56,6 +59,8 @@ void		set_piece_size(t_fill *infos)
 		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 	}
+	if (!ft_strstr(infos->currentline, "Piece"))
+		return (0);
 	temp = &ft_strstr(infos->currentline, "Piece")[6];
 	infos->piecesize.y = ft_atoi(temp);
 	while (ft_ispace(temp[count]))
@@ -65,6 +70,7 @@ void		set_piece_size(t_fill *infos)
 	while (ft_ispace(temp[count]))
 		count++;
 	infos->piecesize.x = ft_atoi(&temp[count]);
+	return (1);
 }
 
 int			grid_parser(t_fill *infos)
@@ -72,8 +78,8 @@ int			grid_parser(t_fill *infos)
 	int		line;
 
 	line = 0;
-	if (infos->gridsize.y == -1)
-		set_grid_size(infos);
+	if (infos->gridsize.y == -1 && !set_grid_size(infos))
+		return (0);
 	if (!infos->grid &&
 			!(infos->grid = init_first_dim(infos->gridsize.y + 1)))
 		return (0);
@@ -81,9 +87,12 @@ int			grid_parser(t_fill *infos)
 	{
 		if (!infos->grid[line])
 			infos->grid[line] = ft_strnew(infos->gridsize.x + 1);
-		if (infos->grid[line] && ft_isdigit(*infos->currentline))
+		if (infos->currentline
+				&& infos->grid[line] && ft_isdigit(*infos->currentline))
+		{
 			fill_array_lines(infos,
 					infos->grid[line++], &infos->currentline[4]);
+		}
 		ft_memdel((void**)&infos->currentline);
 		get_next_line(0, &infos->currentline);
 	}
@@ -95,7 +104,8 @@ int			piece_parser(t_fill *infos)
 	int		line;
 
 	line = 0;
-	set_piece_size(infos);
+	if (!set_piece_size(infos))
+		return (0);
 	while (infos->currentpiece && infos->currentpiece[line])
 		ft_memdel((void**)&infos->currentpiece[line++]);
 	ft_memdel((void**)&infos->currentpiece);
