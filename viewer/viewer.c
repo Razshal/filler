@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 12:30:09 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/02/24 18:27:24 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:24:24 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			main(int argc, char **argv)
 	{
 		if (ft_strstr(line, "Plateau"))
 		{
-			if ((ft_strstr(argv[1], "-q")
+			if (argc >= 2 && ((ft_strstr(argv[1], "-q"))
 					|| (argc > 2 && ft_strstr(argv[2], "-q")))
 					&& (pieces_x + 10 < pieces_o || pieces_o + 10 < pieces_x))
 				break ;
